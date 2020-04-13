@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/13.
+//  Created by Alexey Kirpichnikov on 2020/4/13.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 
