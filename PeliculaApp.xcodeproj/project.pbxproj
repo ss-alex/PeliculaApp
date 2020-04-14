@@ -16,6 +16,7 @@
 		D9F9FA46244484A200C3D509 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA45244484A200C3D509 /* NetworkManager.swift */; };
 		D9F9FA48244484E100C3D509 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA47244484E100C3D509 /* Movie.swift */; };
 		D9F9FA4A2444853D00C3D509 /* URLSession+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA492444853D00C3D509 /* URLSession+Ext.swift */; };
+		D9F9FA6E2445C38A00C3D509 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA6D2445C38A00C3D509 /* MovieCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		D9F9FA45244484A200C3D509 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D9F9FA47244484E100C3D509 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		D9F9FA492444853D00C3D509 /* URLSession+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Ext.swift"; sourceTree = "<group>"; };
+		D9F9FA6D2445C38A00C3D509 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				D9F9FA45244484A200C3D509 /* NetworkManager.swift */,
 				D9F9FA47244484E100C3D509 /* Movie.swift */,
 				D9F9FA492444853D00C3D509 /* URLSession+Ext.swift */,
+				D9F9FA6D2445C38A00C3D509 /* MovieCell.swift */,
 				D9069494244478650022BE8E /* Main.storyboard */,
 				D9069497244478670022BE8E /* Assets.xcassets */,
 				D9069499244478670022BE8E /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9F9FA6E2445C38A00C3D509 /* MovieCell.swift in Sources */,
 				D9F9FA46244484A200C3D509 /* NetworkManager.swift in Sources */,
 				D9069493244478650022BE8E /* ViewController.swift in Sources */,
 				D906948F244478650022BE8E /* AppDelegate.swift in Sources */,
