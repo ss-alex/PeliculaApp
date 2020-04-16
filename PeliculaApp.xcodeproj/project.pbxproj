@@ -12,6 +12,9 @@
 		D9069493244478650022BE8E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9069492244478650022BE8E /* ViewController.swift */; };
 		D9069498244478670022BE8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9069497244478670022BE8E /* Assets.xcassets */; };
 		D906949B244478670022BE8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9069499244478670022BE8E /* LaunchScreen.storyboard */; };
+		D90C33DA2448057800A11397 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90C33D92448057800A11397 /* SearchVC.swift */; };
+		D90C33DC244805BF00A11397 /* FavoritesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90C33DB244805BF00A11397 /* FavoritesListVC.swift */; };
+		D90C33E624480A0200A11397 /* PATabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90C33E524480A0100A11397 /* PATabBarController.swift */; };
 		D9F9FA46244484A200C3D509 /* MobileServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA45244484A200C3D509 /* MobileServiceAPI.swift */; };
 		D9F9FA48244484E100C3D509 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA47244484E100C3D509 /* Movie.swift */; };
 		D9F9FA4A2444853D00C3D509 /* URLSession+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA492444853D00C3D509 /* URLSession+Ext.swift */; };
@@ -28,6 +31,9 @@
 		D9069497244478670022BE8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D906949A244478670022BE8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D906949C244478670022BE8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D90C33D92448057800A11397 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		D90C33DB244805BF00A11397 /* FavoritesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListVC.swift; sourceTree = "<group>"; };
+		D90C33E524480A0100A11397 /* PATabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PATabBarController.swift; sourceTree = "<group>"; };
 		D9F9FA45244484A200C3D509 /* MobileServiceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileServiceAPI.swift; sourceTree = "<group>"; };
 		D9F9FA47244484E100C3D509 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		D9F9FA492444853D00C3D509 /* URLSession+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Ext.swift"; sourceTree = "<group>"; };
@@ -66,18 +72,77 @@
 		D906948D244478650022BE8E /* PeliculaApp */ = {
 			isa = PBXGroup;
 			children = (
-				D906948E244478650022BE8E /* AppDelegate.swift */,
-				D9069490244478650022BE8E /* SceneDelegate.swift */,
-				D9069492244478650022BE8E /* ViewController.swift */,
-				D9F9FA45244484A200C3D509 /* MobileServiceAPI.swift */,
-				D9F9FA47244484E100C3D509 /* Movie.swift */,
-				D9F9FA6D2445C38A00C3D509 /* MovieCell.swift */,
+				D90C33DD2448063300A11397 /* Screens */,
+				D90C33DF2448073900A11397 /* Custom Views */,
+				D90C33E2244807C300A11397 /* Model */,
+				D90C33E12448077600A11397 /* Managers */,
+				D90C33E32448083A00A11397 /* Support */,
 				D9F9FA6F244693BF00C3D509 /* Extension */,
-				D9069497244478670022BE8E /* Assets.xcassets */,
-				D9069499244478670022BE8E /* LaunchScreen.storyboard */,
 				D906949C244478670022BE8E /* Info.plist */,
 			);
 			path = PeliculaApp;
+			sourceTree = "<group>";
+		};
+		D90C33DD2448063300A11397 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				D9069492244478650022BE8E /* ViewController.swift */,
+				D90C33D92448057800A11397 /* SearchVC.swift */,
+				D90C33DB244805BF00A11397 /* FavoritesListVC.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		D90C33DF2448073900A11397 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				D90C33E42448098400A11397 /* TabBarController */,
+				D90C33E02448074F00A11397 /* Cells */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		D90C33E02448074F00A11397 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D9F9FA6D2445C38A00C3D509 /* MovieCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		D90C33E12448077600A11397 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D9F9FA45244484A200C3D509 /* MobileServiceAPI.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		D90C33E2244807C300A11397 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D9F9FA47244484E100C3D509 /* Movie.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D90C33E32448083A00A11397 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				D906948E244478650022BE8E /* AppDelegate.swift */,
+				D9069490244478650022BE8E /* SceneDelegate.swift */,
+				D9069499244478670022BE8E /* LaunchScreen.storyboard */,
+				D9069497244478670022BE8E /* Assets.xcassets */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		D90C33E42448098400A11397 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				D90C33E524480A0100A11397 /* PATabBarController.swift */,
+			);
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
 		D9F9FA6F244693BF00C3D509 /* Extension */ = {
@@ -161,11 +226,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9F9FA71244694D900C3D509 /* UIView+Ext.swift in Sources */,
+				D90C33DC244805BF00A11397 /* FavoritesListVC.swift in Sources */,
 				D9F9FA6E2445C38A00C3D509 /* MovieCell.swift in Sources */,
 				D9F9FA46244484A200C3D509 /* MobileServiceAPI.swift in Sources */,
 				D9069493244478650022BE8E /* ViewController.swift in Sources */,
 				D9F9FA742447071600C3D509 /* UIImageView + Ext.swift in Sources */,
 				D906948F244478650022BE8E /* AppDelegate.swift in Sources */,
+				D90C33DA2448057800A11397 /* SearchVC.swift in Sources */,
+				D90C33E624480A0200A11397 /* PATabBarController.swift in Sources */,
 				D9069491244478650022BE8E /* SceneDelegate.swift in Sources */,
 				D9F9FA4A2444853D00C3D509 /* URLSession+Ext.swift in Sources */,
 				D9F9FA48244484E100C3D509 /* Movie.swift in Sources */,

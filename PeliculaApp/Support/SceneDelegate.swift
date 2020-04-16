@@ -17,14 +17,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let navController = UINavigationController(rootViewController: ViewController())
-        //navController.navigationBar.prefersLargeTitles = true
-        
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = navController
+        window?.rootViewController = PATabBarController()
         window?.makeKeyAndVisible()
+        
+        configureNavigationBar()
     }
+    
+    
+    func configureNavigationBar () {
+        UINavigationBar.appearance().tintColor = .systemGreen
+    }
+    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
