@@ -12,7 +12,7 @@ class PATabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UITabBar.appearance().tintColor = .systemGreen
+        UITabBar.appearance().tintColor = .systemBlue
         viewControllers = [createSearchNC(),createFavoritesNC()]
     }
     
