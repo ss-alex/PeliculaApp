@@ -27,4 +27,8 @@ public struct Movie: Codable {
     public let voteAverage: Double
     public let voteCount: Int
     public let adult: Bool
+    public let posterPath: String?
+    public var posterURL: URL {
+    return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
+    }
 }

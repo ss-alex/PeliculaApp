@@ -2,7 +2,7 @@
 //  MovieCell.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/14.
+//  Created by Alexey Kirpichnikov on 2020/4/14.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 
@@ -12,107 +12,134 @@ class MovieCell: UITableViewCell {
 
     static let reuseID = "MovieCell"
     
-    let movieImageView          = UIImageView()
-    let movieTitleLabel         = UILabel()
-    let movieOverview           = UILabel()
-    let symbolImageView         = UIImageView()
-    let dateLabel               = UILabel()
-    let heartButton             = UIButton()
+    let backView = UIView()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    let movieImageView    = UIImageView()
+    let movieTitleLabel   = UILabel()
+    let movieOverview     = UILabel()
+    let symbolImageView   = UIImageView()
+    let dateLabel         = UILabel()
+    let heartButton       = UIButton()
+    
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureBackView()
+        configureMovieImageView()
+        configureMovieTitleLabel()
+        configureMovieOverview ()
+        configureSymbolImageView()
+        configureDateLabel()
+        configureHeartButton()
+        
+        configureElements()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     
-    private func configureMovieImageView(){
-        addSubview(movieImageView)
-        movieImageView.backgroundColor = .systemFill
+    public static let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy"
+        return dateFormatter
+    }()
+    
+    
+    func set(movie: Movie) {
+        movieImageView.load(url: movie.posterURL)
+        movieTitleLabel.text    = movie.title
+        movieOverview.text      = movie.overview
+        dateLabel.text          = MovieCell.dateFormatter.string(from: movie.releaseDate)
+    }
+    
+    
+    func configureBackView() {
+        backView.translatesAutoresizingMaskIntoConstraints = false
+        backView.backgroundColor = .systemGray6
+        backView.layer.cornerRadius = 5
+        addSubview(backView)
+        
+        NSLayoutConstraint.activate([
+            backView.topAnchor.constraint(equalTo: self.topAnchor, constant: 6),
+            backView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 6),
+            backView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -6),
+            backView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -6)
+        ])
+    }
+    
+    
+    func configureMovieImageView() {
+        backView.addSubview(movieImageView)
+        movieImageView.backgroundColor = .green
+        movieImageView.layer.cornerRadius = 10
+        movieImageView.clipsToBounds = true
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     
-    private func configureTitleLabel() {
-        addSubview(movieTitleLabel)
-        movieTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        movieTitleLabel.text      = "Wonderful life of Alexey Kirpichnikov"
-        movieTitleLabel.font      = UIFont.preferredFont(forTextStyle: .headline)
-        movieTitleLabel.textColor = .label
-        
-        
+    func configureMovieTitleLabel() {
+        backView.addSubview(movieTitleLabel)
         movieTitleLabel.numberOfLines = 2
-        
+        movieTitleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        movieTitleLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
     
-    private func configureMoviewOverview() {
-        addSubview(movieOverview)
-        movieOverview.translatesAutoresizingMaskIntoConstraints = false
-        
-        movieOverview.text              = "Wonderful life of Alexey Kirpichnikov Wonderful life of Alexey Kirpichnikov Wonderful life of Alexey Kirpichnikov Wonderful life of Alexey Kirpichnikov Wonderful life of Alexey Kirpichnikov Wonderful life of Alexey Kirpichnikov"
+    func configureMovieOverview () {
+        backView.addSubview(movieOverview)
         movieOverview.font              = UIFont.preferredFont(forTextStyle: .subheadline)
-        //movieOverview.font              = UIFont.preferredFont(forTextStyle: .footnote)
         movieOverview.lineBreakMode     = .byTruncatingTail
         movieOverview.numberOfLines     = 3
-        movieOverview.adjustsFontForContentSizeCategory = true
-        movieOverview.textColor         = .secondaryLabel
+        movieOverview.translatesAutoresizingMaskIntoConstraints = false
     }
     
     
-    private func configureSymbolImageView() {
-        addSubview(symbolImageView)
+    func configureSymbolImageView() {
+        backView.addSubview(symbolImageView)
+        symbolImageView.image = UIImage(systemName: "calendar")
+        symbolImageView.tintColor = .secondaryLabel
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        symbolImageView.image       = UIImage(systemName: "calendar")
-        symbolImageView.tintColor   = .secondaryLabel
     }
     
     
-    private func configureDateLabel() {
-        addSubview(dateLabel)
+    func configureDateLabel() {
+        backView.addSubview(dateLabel)
+        dateLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        dateLabel.textColor = .secondaryLabel
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        dateLabel.text              = "14 Feb 2020"
-        dateLabel.font              = UIFont.preferredFont(forTextStyle: .footnote)
-        dateLabel.textColor         = .secondaryLabel
     }
     
     
-    private func configureHeartButton() {
-        addSubview(heartButton)
-        heartButton.translatesAutoresizingMaskIntoConstraints = false
-        
+    func configureHeartButton() {
+        backView.addSubview(heartButton)
         heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
         heartButton.tintColor = .systemRed
+        heartButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let padding: CGFloat = 20
-    let innerPadding: CGFloat = 10
     
-    private func configureLayout() {
+    let innerPadding: CGFloat = 10
+    let outerPadding: CGFloat = 4
+    
+    func configureElements() {
         
         NSLayoutConstraint.activate([
-            movieImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            movieImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
-            movieImageView.heightAnchor.constraint(equalToConstant: 160),
+            movieImageView.topAnchor.constraint(equalTo: backView.topAnchor, constant: outerPadding),
+            movieImageView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: outerPadding),
+            movieImageView.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -outerPadding),
             movieImageView.widthAnchor.constraint(equalToConstant: 110),
             
             movieTitleLabel.topAnchor.constraint(equalTo: movieImageView.topAnchor),
             movieTitleLabel.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: innerPadding),
             movieTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -60),
-            //movieTitleLabel.heightAnchor.constraint(equalToConstant: 24),
-            //movieTitleLabel.widthAnchor.constraint(equalToConstant: view.frame.width/2),
             
-            movieOverview.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor, constant: innerPadding),
+            movieOverview.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor, constant: 6),
             movieOverview.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: innerPadding),
-            movieOverview.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
-            movieOverview.heightAnchor.constraint(equalToConstant: 72),
+            movieOverview.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -outerPadding),
+            movieOverview.heightAnchor.constraint(equalToConstant: 62),
             
             symbolImageView.bottomAnchor.constraint(equalTo: movieImageView.bottomAnchor),
             symbolImageView.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: innerPadding),
@@ -120,7 +147,7 @@ class MovieCell: UITableViewCell {
             symbolImageView.heightAnchor.constraint(equalToConstant: 24),
             
             heartButton.centerYAnchor.constraint(equalTo: symbolImageView.centerYAnchor),
-            heartButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
+            heartButton.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -outerPadding),
             heartButton.widthAnchor.constraint(equalToConstant: 24),
             heartButton.heightAnchor.constraint(equalToConstant: 24),
             
@@ -130,7 +157,4 @@ class MovieCell: UITableViewCell {
             dateLabel.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
-    
-    
-
 }
