@@ -9,13 +9,12 @@
 
 import UIKit
 
-//private let reuseID = "MovieCell"
 
-class ViewController: UIViewController {
-
-    //let textField = UITextField()
+class MovieListVC: UIViewController {
+    
     let tableView = UITableView()
     
+    var movieName: String!
     var movies: [Movie] = []
     
     override func viewDidLoad() {
@@ -23,29 +22,27 @@ class ViewController: UIViewController {
         
       
         configureTableView()
-        
-        //configureTextField()
-        //configureLayout()
-        
         searchMovies()
+        
         //fetchNowPlayingMovies()
         //fetchMovieByID()
     }
 
     
-    /*func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchMovies()
-        return true
-    }*/
+    init (movieName: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.movieName = movieName
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     
     func searchMovies() {
-        /*textField.resignFirstResponder() /// dismiss the keyboard when 'return' button is tapped
         
-        guard let textInput = textField.text, !textInput.isEmpty else { return } /// textField is not empty
-        let query = textInput */
-        
-        let query = "monster"
+        let query = movieName ?? ""
         
         movies.removeAll()
         
@@ -67,15 +64,6 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    /*func configureTextField() {
-        view.addSubview(textField)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.delegate = self
-        textField.backgroundColor = .systemGray
-    }*/
-    
-    
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -94,24 +82,6 @@ class ViewController: UIViewController {
         ])
         
     }
-    
-    let padding: CGFloat = 20
-
-    /*func configureLayout() {
-        
-        NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
-            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            textField.heightAnchor.constraint(equalToConstant: 50),
-            
-            
-            tableView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: padding),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding)
-        ])
-    }*/
     
     
     /*func fetchNowPlayingMovies() {
@@ -147,7 +117,7 @@ class ViewController: UIViewController {
 
 
 
-extension ViewController: UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource{
+extension MovieListVC: UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count

@@ -11,9 +11,9 @@ import UIKit
 class SearchVC: UIViewController {
 
     let logoImageView       = UIImageView()
-    let usernameTextField   = UITextField()
+    let movieTextField      = UITextField()
     let goButton            = UIButton()
-    let categoryButtonOne   = PAButton(backgroundColor: .systemGray4, tittle: "Latest")
+    let categoryButtonOne   = PAButton(backgroundColor: .systemGray4, tittle: "Now Playing")
     let categoryButtonTwo   = PAButton(backgroundColor: .systemGray4, tittle: "Popular")
     let categoryButtonThree = PAButton(backgroundColor: .systemGray4, tittle: "Top Rated")
     let categoryButtonFour  = PAButton(backgroundColor: .systemGray4, tittle: "Upcoming")
@@ -42,25 +42,25 @@ class SearchVC: UIViewController {
     
     
     func configureUsernameTextField() {
-        view.addSubview(usernameTextField)
-        usernameTextField.translatesAutoresizingMaskIntoConstraints = false
-        usernameTextField.backgroundColor = .tertiarySystemBackground
+        view.addSubview(movieTextField)
+        movieTextField.translatesAutoresizingMaskIntoConstraints = false
+        movieTextField.backgroundColor = .tertiarySystemBackground
         
-        usernameTextField.layer.cornerRadius    = 10
-        usernameTextField.layer.maskedCorners   = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
-        usernameTextField.layer.borderWidth     = 2
-        usernameTextField.layer.borderColor     = UIColor.systemGray4.cgColor
+        movieTextField.layer.cornerRadius  = 10
+        movieTextField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
+        movieTextField.layer.borderWidth   = 2
+        movieTextField.layer.borderColor   = UIColor.systemGray4.cgColor
         
-        usernameTextField.placeholder                 = "Enter a movie"
-        usernameTextField.textColor                   = .label
-        usernameTextField.textAlignment               = .center
-        usernameTextField.font                        = UIFont.preferredFont(forTextStyle: .title2)
-        usernameTextField.adjustsFontSizeToFitWidth   = true
-        usernameTextField.minimumFontSize             = 12
+        movieTextField.placeholder    = "Enter a movie"
+        movieTextField.textColor      = .label
+        movieTextField.textAlignment  = .center
+        movieTextField.font           = UIFont.preferredFont(forTextStyle: .title2)
+        movieTextField.adjustsFontSizeToFitWidth = true
+        movieTextField.minimumFontSize           = 12
         
-        usernameTextField.autocorrectionType  = .no
-        usernameTextField.returnKeyType       = .go
-        usernameTextField.clearButtonMode     = .whileEditing
+        movieTextField.autocorrectionType  = .no
+        movieTextField.returnKeyType       = .go
+        movieTextField.clearButtonMode     = .whileEditing
     }
     
     
@@ -75,6 +75,14 @@ class SearchVC: UIViewController {
         goButton.titleLabel?.font      = UIFont.preferredFont(forTextStyle: .headline)
         goButton.setTitleColor(.white, for: .normal)
         goButton.setTitle("Go", for: .normal)
+        
+        goButton.addTarget(self, action: #selector(pushMovieListVC), for: .touchUpInside)
+    }
+    
+    
+    @objc func pushMovieListVC() {
+        let movieListVC = MovieListVC(movieName: movieTextField.text!)
+        navigationController?.pushViewController(movieListVC, animated: true)
     }
     
     
@@ -83,12 +91,19 @@ class SearchVC: UIViewController {
     
     func configureCategoryButtons() {
         view.addSubview(categoryButtonOne)
+        categoryButtonOne.addTarget(self, action: #selector(pushNowPlayingMoviesVC), for: .touchUpInside)
+        
         view.addSubview(categoryButtonTwo)
+        categoryButtonTwo.addTarget(self, action: #selector(pushPopularMoviesVC), for: .touchUpInside)
+        
         view.addSubview(categoryButtonThree)
+        categoryButtonThree.addTarget(self, action: #selector(pushTopRatedMoviesVC), for: .touchUpInside)
+        
         view.addSubview(categoryButtonFour)
+        categoryButtonFour.addTarget(self, action: #selector(pushUpcomingMoviesVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            categoryButtonOne.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 80),
+            categoryButtonOne.topAnchor.constraint(equalTo: movieTextField.bottomAnchor, constant: 80),
             categoryButtonOne.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: outerPadding),
             categoryButtonOne.widthAnchor.constraint(equalToConstant: categoryButtonWidth),
             categoryButtonOne.heightAnchor.constraint(equalToConstant: 50),
@@ -112,6 +127,30 @@ class SearchVC: UIViewController {
     }
 
     
+    @objc func pushNowPlayingMoviesVC() {
+        let latestMoviesVC = NowPlayingMoviesVC()
+        navigationController?.pushViewController(latestMoviesVC, animated: true)
+    }
+    
+    
+    @objc func pushPopularMoviesVC() {
+        let populaerMoviesVC = PopularMoviesVC()
+        navigationController?.pushViewController(populaerMoviesVC, animated: true)
+    }
+    
+    
+    @objc func pushTopRatedMoviesVC() {
+        let topRatedMoviesVC = TopRatedMoviesVC()
+        navigationController?.pushViewController(topRatedMoviesVC, animated: true)
+    }
+    
+    
+    @objc func pushUpcomingMoviesVC() {
+        let upcomingMoviesVC = UpcomingMoviesVC()
+        navigationController?.pushViewController(upcomingMoviesVC, animated: true)
+    }
+    
+    
     func configureLayout() {
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
@@ -119,16 +158,15 @@ class SearchVC: UIViewController {
             logoImageView.widthAnchor.constraint(equalToConstant: 180),
             logoImageView.heightAnchor.constraint(equalToConstant: 180),
             
-            usernameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48),
-            usernameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            usernameTextField.widthAnchor.constraint(equalToConstant: 200),
-            usernameTextField.heightAnchor.constraint(equalToConstant: 50),
+            movieTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48),
+            movieTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            movieTextField.widthAnchor.constraint(equalToConstant: 200),
+            movieTextField.heightAnchor.constraint(equalToConstant: 50),
             
-            goButton.topAnchor.constraint(equalTo: usernameTextField.topAnchor),
-            goButton.leadingAnchor.constraint(equalTo: usernameTextField.trailingAnchor),
+            goButton.topAnchor.constraint(equalTo: movieTextField.topAnchor),
+            goButton.leadingAnchor.constraint(equalTo: movieTextField.trailingAnchor),
             goButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             goButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
-
 }

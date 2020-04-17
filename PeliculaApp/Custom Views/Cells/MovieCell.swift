@@ -73,7 +73,7 @@ class MovieCell: UITableViewCell {
     
     func configureMovieImageView() {
         backView.addSubview(movieImageView)
-        movieImageView.backgroundColor = .green
+        movieImageView.backgroundColor = .systemGray5
         movieImageView.layer.cornerRadius = 10
         movieImageView.clipsToBounds = true
         movieImageView.translatesAutoresizingMaskIntoConstraints = false

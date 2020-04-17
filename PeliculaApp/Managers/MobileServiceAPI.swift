@@ -14,9 +14,9 @@ class MobileServiceAPI {
     enum Endpoint: String, CaseIterable {
         
         case nowPlaying = "now_playing"
-        case upcoming = "upcoming"
-        case popular = "popular"
-        case topRated = "top_rated"
+        case upcoming   = "upcoming"
+        case popular    = "popular"
+        case topRated   = "top_rated"
     }
     
     
