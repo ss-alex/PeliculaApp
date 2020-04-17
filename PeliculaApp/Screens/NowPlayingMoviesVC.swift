@@ -18,8 +18,8 @@ class NowPlayingMoviesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchNowPlayingMovies()
         configureTableView()
+        fetchNowPlayingMovies()
         
         //searchMovies()
         //fetchMovieByID()
@@ -54,12 +54,13 @@ class NowPlayingMoviesVC: UIViewController {
     } */
     
     func configureTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
         tableView.separatorColor = UIColor.clear
         self.view.addSubview(tableView)
         tableView.backgroundColor = UIColor.systemBackground
         tableView.register(MovieCell.self, forCellReuseIdentifier: MovieCell.reuseID)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -82,6 +83,7 @@ class NowPlayingMoviesVC: UIViewController {
                 print(movieResponse.results)
                 let playingMovies = movieResponse.results
                 self.nowPlayingMovies.append(contentsOf: playingMovies)
+                DispatchQueue.main.async { self.tableView.reloadData() }
                 //print(self.nowPlayingMovies.first?.title)
                 
             case .failure(let error):

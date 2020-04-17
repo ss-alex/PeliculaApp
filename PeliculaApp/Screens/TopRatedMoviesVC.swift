@@ -18,8 +18,8 @@ class TopRatedMoviesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .blue
-        fetchTopRatedMovies()
         configureTableView()
+        fetchTopRatedMovies()
     }
     
 
@@ -52,6 +52,7 @@ class TopRatedMoviesVC: UIViewController {
                 print(movieResponse.results)
                 let playingMovies = movieResponse.results
                 self.topRatedMovies.append(contentsOf: playingMovies)
+                DispatchQueue.main.async { self.tableView.reloadData() }
                 //print(self.popularMovies.first?.title)
                 
             case .failure(let error):

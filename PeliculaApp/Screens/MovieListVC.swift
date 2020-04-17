@@ -19,15 +19,21 @@ class MovieListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-      
+    
         configureTableView()
         searchMovies()
         
+        //configureViewController()
         //fetchNowPlayingMovies()
         //fetchMovieByID()
     }
 
+    
+    /*override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }*/
+    
     
     init (movieName: String) {
         super.init(nibName: nil, bundle: nil)
@@ -38,6 +44,11 @@ class MovieListVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    /*func configureViewController() {
+        self.title = "Movie"
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }*/
     
     
     func searchMovies() {

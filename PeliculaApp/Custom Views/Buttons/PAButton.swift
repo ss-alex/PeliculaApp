@@ -22,7 +22,7 @@ class PAButton: UIButton {
     
     
     convenience init(backgroundColor: UIColor, tittle: String) {
-        self.init(frame: .zero) // set the frame to .zero since constraints will be added later
+        self.init(frame: .zero) // 
         self.backgroundColor = backgroundColor
         self.setTitle(tittle, for: .normal)
     }
@@ -31,12 +31,12 @@ class PAButton: UIButton {
     private func configure() {
         layer.cornerRadius                          = 10
         titleLabel?.font                            = UIFont.preferredFont(forTextStyle: .headline)
-        setTitleColor(.systemBlue, for: .normal)
+        setTitleColor(.white, for: .normal)
         translatesAutoresizingMaskIntoConstraints   = false
     }
     
     
-    func set(backgroundColor:UIColor, title: String) { /// despite here is the init method that is appropriate for that task, sometimes it is needed to change 'backgroundColor' and 'title' in the  specific way
+    func set(backgroundColor:UIColor, title: String) {
         self.backgroundColor    = backgroundColor
         setTitle(title, for: .normal)
     }
