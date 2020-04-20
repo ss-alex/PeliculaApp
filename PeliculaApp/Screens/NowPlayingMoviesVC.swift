@@ -18,40 +18,23 @@ class NowPlayingMoviesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureViewController()
         configureTableView()
         fetchNowPlayingMovies()
-        
-        //searchMovies()
-        //fetchMovieByID()
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+     }
     
+    
+    func configureViewController() {
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = "Now Playing"
+    }
 
-    
-    /*func searchMovies() {
-        
-        let query = movieName ?? ""
-        
-        movies.removeAll()
-        
-        MobileServiceAPI.shared.searchMovie(query: query, params: nil) { (result: Result<MoviesResponse, MobileServiceAPI.APIServiceError>) in
-            switch result {
-            case . success(let movieResponse):
-                print(movieResponse)
-                
-                let moviesInSearch = movieResponse.results
-                self.movies.append(contentsOf: moviesInSearch)
-                
-                DispatchQueue.main.async { self.tableView.reloadData() } /// UI apdate
-                
-                //print("\(self.movies.first?.title) means it's working")
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    } */
     
     func configureTableView() {
         tableView.separatorColor = UIColor.clear
@@ -91,18 +74,6 @@ class NowPlayingMoviesVC: UIViewController {
             }
         }
     }
-    
-    
-    /*func fetchMovieByID() {
-        MobileServiceAPI.shared.fetchMovie(movieID: 419704) { (result: Result<Movie, MobileServiceAPI.APIServiceError>) in
-            switch result {
-            case . success(let movie):
-                print(movie)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }*/
 
 }
 

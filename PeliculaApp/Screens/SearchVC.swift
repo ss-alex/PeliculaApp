@@ -9,6 +9,8 @@
 import UIKit
 
 class SearchVC: UIViewController {
+    
+    //MARK:- Properties
 
     let logoImageView       = UIImageView()
     let movieTextField      = UITextField()
@@ -19,6 +21,8 @@ class SearchVC: UIViewController {
     let categoryButtonThree = UIButton()
     
     var isUsernameEntered: Bool { return !movieTextField.text!.isEmpty }
+    
+    //MARK:- Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +40,7 @@ class SearchVC: UIViewController {
         configureLayout()
     }
     
+    //MARK:- Methods
     
     func createDismissKeyboardGesture(){ 
         let tap = UITapGestureRecognizer(target: view.self, action: #selector(UIView.endEditing))
@@ -234,7 +239,6 @@ class SearchVC: UIViewController {
 }
 
 //MARK:- Extensions
-
 
 extension SearchVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

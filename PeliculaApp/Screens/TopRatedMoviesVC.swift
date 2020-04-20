@@ -17,9 +17,22 @@ class TopRatedMoviesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+        
+        configureViewController()
         configureTableView()
         fetchTopRatedMovies()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+     }
+
+    
+    func configureViewController() {
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = "Top Rated"
     }
     
 
@@ -53,7 +66,6 @@ class TopRatedMoviesVC: UIViewController {
                 let playingMovies = movieResponse.results
                 self.topRatedMovies.append(contentsOf: playingMovies)
                 DispatchQueue.main.async { self.tableView.reloadData() }
-                //print(self.popularMovies.first?.title)
                 
             case .failure(let error):
                 print(error.localizedDescription)

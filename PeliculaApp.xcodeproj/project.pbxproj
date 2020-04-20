@@ -24,6 +24,8 @@
 		D9154E192449E7C500F900A1 /* PAAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9154E182449E7C500F900A1 /* PAAlertContainerView.swift */; };
 		D9154E1C2449E8FA00F900A1 /* PAAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9154E1B2449E8FA00F900A1 /* PAAlertVC.swift */; };
 		D9154E1E2449F95A00F900A1 /* UIVIewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9154E1D2449F95A00F900A1 /* UIVIewController+Ext.swift */; };
+		D9154E22244AA9FB00F900A1 /* PADataLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9154E21244AA9FB00F900A1 /* PADataLoadingVC.swift */; };
+		D9219DA7244D5979001AA3CB /* MovieScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DA6244D5979001AA3CB /* MovieScreenVC.swift */; };
 		D9F9FA46244484A200C3D509 /* MobileServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA45244484A200C3D509 /* MobileServiceAPI.swift */; };
 		D9F9FA48244484E100C3D509 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA47244484E100C3D509 /* Movie.swift */; };
 		D9F9FA4A2444853D00C3D509 /* URLSession+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA492444853D00C3D509 /* URLSession+Ext.swift */; };
@@ -52,6 +54,8 @@
 		D9154E182449E7C500F900A1 /* PAAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAAlertContainerView.swift; sourceTree = "<group>"; };
 		D9154E1B2449E8FA00F900A1 /* PAAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAAlertVC.swift; sourceTree = "<group>"; };
 		D9154E1D2449F95A00F900A1 /* UIVIewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIewController+Ext.swift"; sourceTree = "<group>"; };
+		D9154E21244AA9FB00F900A1 /* PADataLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PADataLoadingVC.swift; sourceTree = "<group>"; };
+		D9219DA6244D5979001AA3CB /* MovieScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieScreenVC.swift; sourceTree = "<group>"; };
 		D9F9FA45244484A200C3D509 /* MobileServiceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileServiceAPI.swift; sourceTree = "<group>"; };
 		D9F9FA47244484E100C3D509 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		D9F9FA492444853D00C3D509 /* URLSession+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Ext.swift"; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 				D90C33ED2448A85B00A11397 /* NowPlayingMoviesVC.swift */,
 				D90C33EF2448A87C00A11397 /* PopularMoviesVC.swift */,
 				D90C33F12448A89700A11397 /* TopRatedMoviesVC.swift */,
+				D9219DA6244D5979001AA3CB /* MovieScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				D9154E1B2449E8FA00F900A1 /* PAAlertVC.swift */,
+				D9154E21244AA9FB00F900A1 /* PADataLoadingVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -292,6 +298,7 @@
 				D9F9FA46244484A200C3D509 /* MobileServiceAPI.swift in Sources */,
 				D90C33EE2448A85B00A11397 /* NowPlayingMoviesVC.swift in Sources */,
 				D9069493244478650022BE8E /* MovieListVC.swift in Sources */,
+				D9219DA7244D5979001AA3CB /* MovieScreenVC.swift in Sources */,
 				D90C33E92448974E00A11397 /* PAButton.swift in Sources */,
 				D9F9FA742447071600C3D509 /* UIImageView+URL.swift in Sources */,
 				D9154E1C2449E8FA00F900A1 /* PAAlertVC.swift in Sources */,
@@ -302,6 +309,7 @@
 				D9154E122449E39900F900A1 /* PATitleLabel.swift in Sources */,
 				D90C33E624480A0200A11397 /* PATabBarController.swift in Sources */,
 				D9069491244478650022BE8E /* SceneDelegate.swift in Sources */,
+				D9154E22244AA9FB00F900A1 /* PADataLoadingVC.swift in Sources */,
 				D9F9FA4A2444853D00C3D509 /* URLSession+Ext.swift in Sources */,
 				D90C33F02448A87C00A11397 /* PopularMoviesVC.swift in Sources */,
 				D9F9FA48244484E100C3D509 /* Movie.swift in Sources */,
