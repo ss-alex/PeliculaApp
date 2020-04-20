@@ -2,7 +2,7 @@
 //  LatestMoviesVC.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/16.
+//  Created by Alexey Kirpichnikov on 2020/4/16.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 
@@ -103,6 +103,10 @@ extension NowPlayingMoviesVC: UITextFieldDelegate, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let movie   = nowPlayingMovies[indexPath.row]
+        let destVC  = MovieScreenVC()
+        destVC.movieID = movie.id
+        navigationController?.pushViewController(destVC, animated: true)
     }
     
 }
