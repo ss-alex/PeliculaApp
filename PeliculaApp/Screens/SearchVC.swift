@@ -40,7 +40,15 @@ class SearchVC: UIViewController {
         configureLayout()
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.tabBarController?.tabBar.isHidden = false
+       }
+    
+    
     //MARK:- Methods
+    
     
     func createDismissKeyboardGesture(){ 
         let tap = UITapGestureRecognizer(target: view.self, action: #selector(UIView.endEditing))

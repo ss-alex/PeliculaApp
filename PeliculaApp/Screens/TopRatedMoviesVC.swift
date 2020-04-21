@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TopRatedMoviesVC: UIViewController {
+class TopRatedMoviesVC: PADataLoadingVC {
 
     let tableView = UITableView()
     
@@ -25,8 +25,10 @@ class TopRatedMoviesVC: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        UINavigationBar.appearance().tintColor = .systemBlue
         self.tabBarController?.tabBar.isHidden = true
-     }
+    }
 
     
     func configureViewController() {
@@ -56,9 +58,12 @@ class TopRatedMoviesVC: UIViewController {
     
     
     func fetchTopRatedMovies() {
+        showLoadingView()
         topRatedMovies.removeAll()
         
-        MobileServiceAPI.shared.fetchMovies(from: .topRated) { (result: Result<MoviesResponse, MobileServiceAPI.APIServiceError>) in
+        NetworkManager.shared.fetchMovies(from: .topRated) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
+            
+            self.dismissLoadingView()
             
             switch result {
             case .success(let movieResponse):
@@ -105,7 +110,9 @@ extension TopRatedMoviesVC: UITextFieldDelegate, UITableViewDelegate, UITableVie
         let movie   = topRatedMovies[indexPath.row]
         let destVC  = MovieScreenVC()
         destVC.movieID = movie.id
-        navigationController?.pushViewController(destVC, animated: true)
+        
+        let navController = UINavigationController(rootViewController: destVC)
+        present(navController, animated: true)
     }
     
 }

@@ -2,7 +2,7 @@
 //  PADataLoadingVC.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/18.
+//  Created by Alexey Kirpichnikov on 2020/4/18.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 

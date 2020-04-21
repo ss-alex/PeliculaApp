@@ -10,7 +10,7 @@
 import UIKit
 
 
-class MovieListVC: UIViewController {
+class MovieListVC: PADataLoadingVC {
     
     let tableView = UITableView()
     
@@ -27,8 +27,9 @@ class MovieListVC: UIViewController {
 
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.tabBarController?.tabBar.isHidden = true
-     }
+    }
     
     
     init (movieName: String) {
@@ -51,11 +52,16 @@ class MovieListVC: UIViewController {
     
     func searchMovies() {
         
+        showLoadingView()
+        
         let query = movieName ?? ""
         
         movies.removeAll()
         
-        MobileServiceAPI.shared.searchMovie(query: query, params: nil) { (result: Result<MoviesResponse, MobileServiceAPI.APIServiceError>) in
+        NetworkManager.shared.searchMovie(query: query, params: nil) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
+            
+            self.dismissLoadingView()
+            
             switch result {
             case . success(let movieResponse):
                 print(movieResponse)
@@ -63,9 +69,7 @@ class MovieListVC: UIViewController {
                 let moviesInSearch = movieResponse.results
                 self.movies.append(contentsOf: moviesInSearch)
                 
-                DispatchQueue.main.async { self.tableView.reloadData() } /// UI apdate
-                
-                //print("\(self.movies.first?.title) means it's working")
+                DispatchQueue.main.async { self.tableView.reloadData() }
                 
             case .failure(let error):
                 print(error.localizedDescription)
@@ -154,7 +158,9 @@ extension MovieListVC: UITextFieldDelegate, UITableViewDelegate, UITableViewData
         let movie   = movies[indexPath.row]
         let destVC  = MovieScreenVC()
         destVC.movieID = movie.id
-        navigationController?.pushViewController(destVC, animated: true)
+        
+        let navController = UINavigationController(rootViewController: destVC)
+        present(navController, animated: true)
     }
     
     

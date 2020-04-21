@@ -9,6 +9,8 @@
 import UIKit
 
 class MovieCell: UITableViewCell {
+    
+   // var link: MovieListVC?
 
     static let reuseID = "MovieCell"
     
@@ -59,7 +61,7 @@ class MovieCell: UITableViewCell {
     func configureBackView() {
         backView.translatesAutoresizingMaskIntoConstraints = false
         backView.backgroundColor = .systemGray6
-        backView.layer.cornerRadius = 5
+        backView.layer.cornerRadius = 10
         addSubview(backView)
         
         NSLayoutConstraint.activate([
@@ -115,9 +117,16 @@ class MovieCell: UITableViewCell {
     
     func configureHeartButton() {
         backView.addSubview(heartButton)
-        heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        heartButton.tintColor = .systemRed
+        //heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        heartButton.tintColor = .systemPink
         heartButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        heartButton.addTarget(self, action: #selector(handleMarkAsFavorite), for: .touchUpInside)
+    }
+    
+    
+    @objc func handleMarkAsFavorite() {
+        print("Marking as favorite")
     }
     
     
@@ -127,12 +136,12 @@ class MovieCell: UITableViewCell {
     func configureElements() {
         
         NSLayoutConstraint.activate([
-            movieImageView.topAnchor.constraint(equalTo: backView.topAnchor, constant: outerPadding),
-            movieImageView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: outerPadding),
-            movieImageView.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -outerPadding),
+            movieImageView.topAnchor.constraint(equalTo: backView.topAnchor),
+            movieImageView.leadingAnchor.constraint(equalTo: backView.leadingAnchor),
+            movieImageView.bottomAnchor.constraint(equalTo: backView.bottomAnchor),
             movieImageView.widthAnchor.constraint(equalToConstant: 110),
             
-            movieTitleLabel.topAnchor.constraint(equalTo: movieImageView.topAnchor),
+            movieTitleLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: outerPadding),
             movieTitleLabel.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: innerPadding),
             movieTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -60),
             

@@ -2,7 +2,7 @@
 //  PAAlertVCViewController.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/17.
+//  Created by Alexey Kirpichnikov on 2020/4/17.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 

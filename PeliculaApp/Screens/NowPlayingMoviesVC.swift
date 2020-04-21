@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NowPlayingMoviesVC: UIViewController {
+class NowPlayingMoviesVC: PADataLoadingVC {
 
     let tableView = UITableView()
     
@@ -25,8 +25,9 @@ class NowPlayingMoviesVC: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.tabBarController?.tabBar.isHidden = true
-     }
+    }
     
     
     func configureViewController() {
@@ -57,9 +58,12 @@ class NowPlayingMoviesVC: UIViewController {
     
     
     func fetchNowPlayingMovies() {
+        showLoadingView()
         nowPlayingMovies.removeAll()
         
-        MobileServiceAPI.shared.fetchMovies(from: .nowPlaying) { (result: Result<MoviesResponse, MobileServiceAPI.APIServiceError>) in
+        NetworkManager.shared.fetchMovies(from: .nowPlaying) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
+            
+            self.dismissLoadingView()
             
             switch result {
             case .success(let movieResponse):
@@ -106,7 +110,9 @@ extension NowPlayingMoviesVC: UITextFieldDelegate, UITableViewDelegate, UITableV
         let movie   = nowPlayingMovies[indexPath.row]
         let destVC  = MovieScreenVC()
         destVC.movieID = movie.id
-        navigationController?.pushViewController(destVC, animated: true)
+        
+        let navController = UINavigationController(rootViewController: destVC)
+        present(navController, animated: true)
     }
     
 }

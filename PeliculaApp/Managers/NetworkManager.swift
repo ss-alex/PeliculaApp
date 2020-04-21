@@ -9,7 +9,7 @@
 
 import Foundation
 
-class MobileServiceAPI {
+class NetworkManager {
     
     enum Endpoint: String, CaseIterable {
         
@@ -29,7 +29,7 @@ class MobileServiceAPI {
         case decodeError
     }
     
-    public static let shared = MobileServiceAPI()
+    public static let shared = NetworkManager()
     
     private init() {}
     
