@@ -20,12 +20,12 @@ class NetworkManager {
     }
     
     
-    public enum APIServiceError: Error {
+    public enum APIServiceError: String, Error {
         
         case apiError
         case invalidEndpoint
         case invalidResponse
-        case noData
+        case noData             = "The data received from the server was invalid. Please try again."
         case decodeError
     }
     
@@ -48,6 +48,7 @@ class NetworkManager {
     }()
     
     
+     //MARK:- General method
     
     private func fetchMovieInfo <T: Decodable>(url: URL, completion: @escaping (Result<T, APIServiceError>) -> Void) {
         
@@ -80,11 +81,14 @@ class NetworkManager {
                 }
             case .failure(let error):
                 completion(.failure(.apiError))
+                print("error message: \(error.localizedDescription)")
             }
         }.resume()
     }
     
 
+    //MARK:- Method for categories
+    
     public func fetchMovies(from endpoint: Endpoint, result: @escaping (Result<MoviesResponse, APIServiceError>) -> Void) {
         let movieURL = baseURL
             .appendingPathComponent("movie")
@@ -94,7 +98,7 @@ class NetworkManager {
     }
     
     
-    
+    //MARK:- Method for MovieID
     public func fetchMovie(movieID: Int, result: @escaping (Result <Movie, APIServiceError>) -> Void) {
         
         let movieURL = baseURL
@@ -105,10 +109,7 @@ class NetworkManager {
     }
     
     
-    
-    
-    
-    
+    //MARK:- Method for MovieKeyword
     public func searchMovie(query: String, params: [String : String]?, completion: @escaping (Result<MoviesResponse,APIServiceError>) -> Void) {
         
         guard var urlComponents = URLComponents(string: "\(baseURL)/search/movie") else {
