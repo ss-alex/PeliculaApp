@@ -20,12 +20,12 @@ class NetworkManager {
     }
     
     
-    public enum APIServiceError: Error {
+    public enum APIServiceError: String, Error {
         
         case apiError
         case invalidEndpoint
         case invalidResponse
-        case noData
+        case noData             = "The data received from the server was invalid. Please try again."
         case decodeError
     }
     
@@ -80,6 +80,7 @@ class NetworkManager {
                 }
             case .failure(let error):
                 completion(.failure(.apiError))
+                print("error message: \(error.localizedDescription)")
             }
         }.resume()
     }
