@@ -7,12 +7,11 @@
 //
 
 
-import Foundation
+import UIKit
 
 class NetworkManager {
     
     enum Endpoint: String, CaseIterable {
-        
         case nowPlaying = "now_playing"
         case upcoming   = "upcoming"
         case popular    = "popular"
@@ -46,6 +45,8 @@ class NetworkManager {
         jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
         return jsonDecoder
     }()
+    
+    var imageCache = NSCache<NSString, UIImage>()
     
     
      //MARK:- General methods
@@ -125,7 +126,7 @@ class NetworkManager {
     }
     
 
-    //MARK:- Method for categories
+    //MARK:- Method for Categories
     
     public func fetchMovies(from endpoint: Endpoint, page: Int, result: @escaping (Result<MoviesResponse, APIServiceError>) -> Void) {
         let movieURL = baseURL
@@ -190,7 +191,40 @@ class NetworkManager {
                 }
             case .failure(let error):
                 completion(.failure(.apiError))
+                print ("\(error.localizedDescription)")
             }
         }.resume()
     }
+    
+    
+    //MARK:- Method DownloadImage
+    
+    
+    func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
+        
+        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+            completion(cachedImage)
+        } else {
+            let request = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 10)
+            let dataTask = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+                
+                guard error == nil,
+                    data != nil,
+                    let response = response as? HTTPURLResponse,
+                    response.statusCode == 200,
+                    let `self` = self else {
+                        return
+                }
+                
+                guard let image = UIImage(data: data!) else { return }
+                self.imageCache.setObject(image, forKey: url.absoluteString as NSString)
+                
+                DispatchQueue.main.async {
+                    completion(image)
+                }
+            }
+            dataTask.resume()
+        }
+    }
+    
 }
