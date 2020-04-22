@@ -18,7 +18,8 @@ public struct MoviesResponse: Codable {
 }
 
 
-public struct Movie: Codable {
+public struct Movie: Codable, Hashable {
+    
     
     public let id: Int
     public let title: String
@@ -40,6 +41,9 @@ public struct Movie: Codable {
 }
 
 
-public struct MovieGenre: Codable {
+public struct MovieGenre: Codable, Hashable {
     let name: String
 }
+
+
+

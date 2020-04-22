@@ -51,7 +51,9 @@ class MovieCell: UITableViewCell {
     
     
     func set(movie: Movie) {
-        movieImageView.load(url: movie.posterURL)
+        NetworkManager.shared.downloadImage(url: movie.posterURL) { image in
+            self.movieImageView.image = image
+        }
         movieTitleLabel.text    = movie.title
         movieOverview.text      = movie.overview
         dateLabel.text          = MovieCell.dateFormatter.string(from: movie.releaseDate)

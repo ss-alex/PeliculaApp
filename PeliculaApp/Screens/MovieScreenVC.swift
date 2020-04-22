@@ -79,8 +79,14 @@ class MovieScreenVC: UIViewController {
                 print(movie)
                 
                 DispatchQueue.main.async {
-                    self.backdropImageView.load(url: movie.backdropURL)
-                    self.posterImageView.load(url: movie.posterURL)
+                    //self.backdropImageView.load(url: movie.backdropURL)
+                    NetworkManager.shared.downloadImage(url: movie.backdropURL) { image in
+                        self.backdropImageView.image = image
+                    }
+                    //self.posterImageView.load(url: movie.posterURL)
+                    NetworkManager.shared.downloadImage(url: movie.posterURL) { image in
+                        self.posterImageView.image = image
+                    }
                     self.movieTitleLabel.text = movie.title
                     self.scoreLabel.text      = String(movie.voteAverage)
                     self.releaseLabel.text    = "Release time: \(MovieScreenVC.dateFormatter.string(from: movie.releaseDate))"
