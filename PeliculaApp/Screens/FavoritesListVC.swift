@@ -56,8 +56,8 @@ extension FavoritesListVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favoritedMovie = favoritedMovies[indexPath.row]
-        let destVC         = MovieScreenVC()
-        navigationController?.pushViewController(destVC, animated: true)
+        //let destVC         = MovieScreenVC()
+        //navigationController?.pushViewController(destVC, animated: true)
     }
     
     

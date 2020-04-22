@@ -17,18 +17,22 @@ class MovieListVC: PADataLoadingVC {
     var movieName: String!
     var movies: [Movie] = []
     
+    var page = 1
+    var isLoadingMoreMovies = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         configureViewController()
         configureTableView()
-        searchMovies()
+        searchMovies(query: movieName, page: page)
     }
 
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.tabBarController?.tabBar.isHidden = true
+        movies.removeAll()
     }
     
     
@@ -50,32 +54,28 @@ class MovieListVC: PADataLoadingVC {
     }
     
     
-    func searchMovies() {
+    func searchMovies(query: String, page: Int) {
         
         showLoadingView()
+        isLoadingMoreMovies = true
         
-        let query = movieName ?? ""
-        
-        movies.removeAll()
-        
-        NetworkManager.shared.searchMovie(query: query, params: nil) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
-            
+        NetworkManager.shared.searchMovie(query: query, page: page, params: nil) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
             self.dismissLoadingView()
-            
+    
             switch result {
             case . success(let movieResponse):
-                print(movieResponse)
-                
                 let moviesInSearch = movieResponse.results
                 self.movies.append(contentsOf: moviesInSearch)
-                
                 DispatchQueue.main.async { self.tableView.reloadData() }
                 
             case .failure(let error):
-                print(error.localizedDescription)
+                self.presentPAAlertOnMainThread(title: "Oops", message: "No more movies by this keyword.", buttonTitle: "Ok")
+                print ("\(error.localizedDescription)")
             }
+            self.isLoadingMoreMovies = false
         }
     }
+    
     
     func configureTableView() {
         tableView.delegate = self
@@ -96,41 +96,25 @@ class MovieListVC: PADataLoadingVC {
         
     }
     
-    
-    /*func fetchNowPlayingMovies() {
-        MobileServiceAPI.shared.fetchMovies(from: .nowPlaying) { (result: Result<MoviesResponse, MobileServiceAPI.APIServiceError>) in
-            
-            switch result {
-            case .success(let movieResponse):
-                print(movieResponse.results)
-                let playingMovies = movieResponse.results
-                self.movies.append(contentsOf: playingMovies)
-                
-                print(self.movies.first?.title)
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }*/
-    
-    
-    /*func fetchMovieByID() {
-        MobileServiceAPI.shared.fetchMovie(movieID: 419704) { (result: Result<Movie, MobileServiceAPI.APIServiceError>) in
-            switch result {
-            case . success(let movie):
-                print(movie)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }*/
 }
 
 
-
-
 extension MovieListVC: UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource{
+    
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        let offsetY         = scrollView.contentOffset.y
+        let contentHeight   = scrollView.contentSize.height
+        let screenHeight    = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - screenHeight { /// when scrolled to the very bottom
+            guard !isLoadingMoreMovies else { return }
+            page += 1
+            searchMovies(query: movieName, page: page)
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count

@@ -15,18 +15,22 @@ class NowPlayingMoviesVC: PADataLoadingVC {
     var movieName: String!
     var nowPlayingMovies: [Movie] = []
     
+    var page = 1
+    var isLoadingMoreMovies = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureViewController()
         configureTableView()
-        fetchNowPlayingMovies()
+        fetchNowPlayingMovies(page: page)
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.tabBarController?.tabBar.isHidden = true
+        nowPlayingMovies.removeAll()
     }
     
     
@@ -57,12 +61,12 @@ class NowPlayingMoviesVC: PADataLoadingVC {
     }
     
     
-    func fetchNowPlayingMovies() {
-        showLoadingView()
-        nowPlayingMovies.removeAll()
+    func fetchNowPlayingMovies(page: Int) {
         
-        NetworkManager.shared.fetchMovies(from: .nowPlaying) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
-            
+        showLoadingView()
+        isLoadingMoreMovies = true
+        
+        NetworkManager.shared.fetchMovies(from: .nowPlaying, page: page) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
             self.dismissLoadingView()
             
             switch result {
@@ -71,11 +75,11 @@ class NowPlayingMoviesVC: PADataLoadingVC {
                 let playingMovies = movieResponse.results
                 self.nowPlayingMovies.append(contentsOf: playingMovies)
                 DispatchQueue.main.async { self.tableView.reloadData() }
-                //print(self.nowPlayingMovies.first?.title)
                 
             case .failure(let error):
                 print(error.localizedDescription)
             }
+            self.isLoadingMoreMovies = false
         }
     }
 
@@ -83,6 +87,20 @@ class NowPlayingMoviesVC: PADataLoadingVC {
 
 
 extension NowPlayingMoviesVC: UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource{
+    
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY         = scrollView.contentOffset.y
+        let contentHeight   = scrollView.contentSize.height
+        let screenHeight    = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - screenHeight {
+            guard !isLoadingMoreMovies else { return }
+            page += 1
+            fetchNowPlayingMovies(page: page)
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return nowPlayingMovies.count

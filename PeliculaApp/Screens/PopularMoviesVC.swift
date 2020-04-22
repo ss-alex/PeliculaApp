@@ -15,19 +15,22 @@ class PopularMoviesVC: PADataLoadingVC {
     var movieName: String!
     var popularMovies: [Movie] = []
     
+    var page = 1
+    var isLoadingMoreMovies = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureViewController()
         configureTableView()
-        fetchPopularMovies()
+        fetchPopularMovies(page: page)
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.tabBarController?.tabBar.isHidden = true
+        popularMovies.removeAll()
     }
 
     
@@ -57,12 +60,11 @@ class PopularMoviesVC: PADataLoadingVC {
     }
     
     
-    func fetchPopularMovies() {
+    func fetchPopularMovies(page: Int) {
         showLoadingView()
-        popularMovies.removeAll()
+        isLoadingMoreMovies = true
         
-        NetworkManager.shared.fetchMovies(from: .popular) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
-            
+        NetworkManager.shared.fetchMovies(from: .popular, page: page) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
             self.dismissLoadingView()
             
             switch result {
@@ -71,11 +73,11 @@ class PopularMoviesVC: PADataLoadingVC {
                 let playingMovies = movieResponse.results
                 self.popularMovies.append(contentsOf: playingMovies)
                 DispatchQueue.main.async { self.tableView.reloadData() }
-                //print(self.popularMovies.first?.title)
                 
             case .failure(let error):
                 print(error.localizedDescription)
             }
+            self.isLoadingMoreMovies = false
         }
     }
     
@@ -83,6 +85,20 @@ class PopularMoviesVC: PADataLoadingVC {
 
 
 extension PopularMoviesVC: UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource{
+    
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY         = scrollView.contentOffset.y
+        let contentHeight   = scrollView.contentSize.height
+        let screenHeight    = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - screenHeight {
+            guard !isLoadingMoreMovies else { return }
+            page += 1
+            fetchPopularMovies(page: page)
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return popularMovies.count
@@ -116,3 +132,4 @@ extension PopularMoviesVC: UITextFieldDelegate, UITableViewDelegate, UITableView
     }
     
 }
+

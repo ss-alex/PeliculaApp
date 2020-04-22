@@ -227,9 +227,9 @@ class SearchVC: UIViewController {
     }
     
     
-    @objc func pushNowPlayingMoviesVC() {
-        let latestMoviesVC = NowPlayingMoviesVC()
-        navigationController?.pushViewController(latestMoviesVC, animated: true)
+   @objc func pushNowPlayingMoviesVC() {
+        let nowPlayingMoviesVC = NowPlayingMoviesVC()
+        navigationController?.pushViewController(nowPlayingMoviesVC, animated: true)
     }
     
     
@@ -243,7 +243,7 @@ class SearchVC: UIViewController {
         let topRatedMoviesVC = TopRatedMoviesVC()
         navigationController?.pushViewController(topRatedMoviesVC, animated: true)
     }
-    
+
 }
 
 //MARK:- Extensions

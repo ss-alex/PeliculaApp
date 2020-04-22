@@ -15,12 +15,15 @@ class TopRatedMoviesVC: PADataLoadingVC {
     var movieName: String!
     var topRatedMovies: [Movie] = []
     
+    var page = 1
+    var isLoadingMoreMovies = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureViewController()
         configureTableView()
-        fetchTopRatedMovies()
+        fetchTopRatedMovies(page: page)
     }
     
     
@@ -28,6 +31,7 @@ class TopRatedMoviesVC: PADataLoadingVC {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         UINavigationBar.appearance().tintColor = .systemBlue
         self.tabBarController?.tabBar.isHidden = true
+        topRatedMovies.removeAll()
     }
 
     
@@ -57,11 +61,11 @@ class TopRatedMoviesVC: PADataLoadingVC {
     }
     
     
-    func fetchTopRatedMovies() {
+    func fetchTopRatedMovies(page: Int) {
         showLoadingView()
-        topRatedMovies.removeAll()
+        isLoadingMoreMovies = true
         
-        NetworkManager.shared.fetchMovies(from: .topRated) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
+        NetworkManager.shared.fetchMovies(from: .topRated, page: page) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
             
             self.dismissLoadingView()
             
@@ -75,6 +79,7 @@ class TopRatedMoviesVC: PADataLoadingVC {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+            self.isLoadingMoreMovies = false
         }
     }
     
@@ -83,6 +88,18 @@ class TopRatedMoviesVC: PADataLoadingVC {
 
 
 extension TopRatedMoviesVC: UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource{
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY         = scrollView.contentOffset.y
+        let contentHeight   = scrollView.contentSize.height
+        let screenHeight    = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - screenHeight {
+            guard !isLoadingMoreMovies else { return }
+            page += 1
+            fetchTopRatedMovies(page: page)
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return topRatedMovies.count
@@ -116,4 +133,5 @@ extension TopRatedMoviesVC: UITextFieldDelegate, UITableViewDelegate, UITableVie
     }
     
 }
+
 
