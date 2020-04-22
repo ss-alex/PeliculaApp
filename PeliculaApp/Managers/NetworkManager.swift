@@ -48,9 +48,47 @@ class NetworkManager {
     }()
     
     
-     //MARK:- General method
+     //MARK:- General methods
     
-    private func fetchMovieInfo <T: Decodable>(url: URL, completion: @escaping (Result<T, APIServiceError>) -> Void) {
+    private func fetchMovieInfo <T: Decodable>(url: URL, page: Int, completion: @escaping (Result<T, APIServiceError>) -> Void) {
+        
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        
+        let queryItems = [URLQueryItem(name: "api_key", value: apiKey),
+                          URLQueryItem(name: "page", value: "\(page)")]
+        urlComponents.queryItems = queryItems
+        
+        guard let url = urlComponents.url else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        
+        urlSession.dataTask(with: url) { (result) in
+            switch result {
+                
+            case .success(let (response, data)):
+                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= statusCode else {
+                    completion(.failure(.invalidResponse))
+                    return
+                }
+                do {
+                    let values = try self.jsonDecoder.decode(T.self, from: data)
+                    completion(.success(values))
+                } catch {
+                    completion(.failure(.decodeError))
+                }
+            case .failure(let error):
+                completion(.failure(.apiError))
+                print("error message: \(error.localizedDescription)")
+            }
+        }.resume()
+    }
+    
+    
+    private func fetchMovieInfoByID <T: Decodable>(url: URL, completion: @escaping (Result<T, APIServiceError>) -> Void) {
         
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             completion(.failure(.invalidEndpoint))
@@ -89,12 +127,12 @@ class NetworkManager {
 
     //MARK:- Method for categories
     
-    public func fetchMovies(from endpoint: Endpoint, result: @escaping (Result<MoviesResponse, APIServiceError>) -> Void) {
+    public func fetchMovies(from endpoint: Endpoint, page: Int, result: @escaping (Result<MoviesResponse, APIServiceError>) -> Void) {
         let movieURL = baseURL
             .appendingPathComponent("movie")
             .appendingPathComponent(endpoint.rawValue)
         
-        fetchMovieInfo(url: movieURL, completion: result)
+        fetchMovieInfo(url: movieURL, page: page, completion: result)
     }
     
     
@@ -105,12 +143,12 @@ class NetworkManager {
         .appendingPathComponent("movie")
         .appendingPathComponent(String(movieID))
         
-        fetchMovieInfo(url: movieURL, completion: result)
+        fetchMovieInfoByID(url: movieURL, completion: result)
     }
     
     
-    //MARK:- Method for MovieKeyword
-    public func searchMovie(query: String, params: [String : String]?, completion: @escaping (Result<MoviesResponse,APIServiceError>) -> Void) {
+    //MARK:- Method for a Movie keyword
+    public func searchMovie(query: String, page: Int, params: [String : String]?, completion: @escaping (Result<MoviesResponse,APIServiceError>) -> Void) {
         
         guard var urlComponents = URLComponents(string: "\(baseURL)/search/movie") else {
             completion(.failure(.invalidEndpoint))
@@ -121,7 +159,8 @@ class NetworkManager {
         URLQueryItem(name: "language", value: "en-US"),
         URLQueryItem(name: "include_adult", value: "false"),
         URLQueryItem(name: "region", value: "US"),
-        URLQueryItem(name: "query", value: query)
+        URLQueryItem(name: "query", value: query),
+        URLQueryItem(name: "page", value: "\(page)")
         ]
         
         if let params = params {
