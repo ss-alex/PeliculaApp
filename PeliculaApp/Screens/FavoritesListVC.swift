@@ -63,6 +63,7 @@ class FavoritesListVC: PADataLoadingVC {
     func updateUI(with favoritedMovies: [FavoritedMovie]) {
         if favoritedMovies.isEmpty {
             print ("No favorited users")
+            self.showEmptyStateView(with: "No Movies?\nSearch and add a new one.", in: self.view)
         } else {
             self.favoritedMovies = favoritedMovies
             DispatchQueue.main.async {

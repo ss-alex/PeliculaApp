@@ -33,6 +33,8 @@
 		D9219DB4244EC419001AA3CB /* UITableView+RemoveCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DB3244EC419001AA3CB /* UITableView+RemoveCells.swift */; };
 		D9839D2C24511FE500B10493 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9839D2B24511FE500B10493 /* FavoriteCell.swift */; };
 		D9839D2F245120C500B10493 /* PAPosterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9839D2E245120C500B10493 /* PAPosterImageView.swift */; };
+		D9839D312452CD3000B10493 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9839D302452CD3000B10493 /* Constants.swift */; };
+		D9839D332452D0A200B10493 /* PAEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9839D322452D0A200B10493 /* PAEmptyStateView.swift */; };
 		D9F9FA46244484A200C3D509 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA45244484A200C3D509 /* NetworkManager.swift */; };
 		D9F9FA48244484E100C3D509 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA47244484E100C3D509 /* Movie.swift */; };
 		D9F9FA4A2444853D00C3D509 /* URLSession+DataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA492444853D00C3D509 /* URLSession+DataTask.swift */; };
@@ -70,6 +72,8 @@
 		D9219DB3244EC419001AA3CB /* UITableView+RemoveCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+RemoveCells.swift"; sourceTree = "<group>"; };
 		D9839D2B24511FE500B10493 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		D9839D2E245120C500B10493 /* PAPosterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAPosterImageView.swift; sourceTree = "<group>"; };
+		D9839D302452CD3000B10493 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D9839D322452D0A200B10493 /* PAEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAEmptyStateView.swift; sourceTree = "<group>"; };
 		D9F9FA45244484A200C3D509 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D9F9FA47244484E100C3D509 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		D9F9FA492444853D00C3D509 /* URLSession+DataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+DataTask.swift"; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				D9154E182449E7C500F900A1 /* PAAlertContainerView.swift */,
+				D9839D322452D0A200B10493 /* PAEmptyStateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				D9219DAF244EA620001AA3CB /* PAError.swift */,
+				D9839D302452CD3000B10493 /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -344,9 +350,11 @@
 				D9154E1E2449F95A00F900A1 /* UIVIewController+Alert.swift in Sources */,
 				D9F9FA46244484A200C3D509 /* NetworkManager.swift in Sources */,
 				D9219DB0244EA620001AA3CB /* PAError.swift in Sources */,
+				D9839D312452CD3000B10493 /* Constants.swift in Sources */,
 				D9219DB2244EACBB001AA3CB /* FavoritedMovie.swift in Sources */,
 				D90C33EE2448A85B00A11397 /* NowPlayingMoviesVC.swift in Sources */,
 				D9069493244478650022BE8E /* MovieListVC.swift in Sources */,
+				D9839D332452D0A200B10493 /* PAEmptyStateView.swift in Sources */,
 				D9219DA7244D5979001AA3CB /* MovieScreenVC.swift in Sources */,
 				D90C33E92448974E00A11397 /* PAButton.swift in Sources */,
 				D9F9FA742447071600C3D509 /* UIImageView+URL.swift in Sources */,

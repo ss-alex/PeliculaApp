@@ -17,7 +17,7 @@ enum PersistenceManager {
     
     static private let defaults = UserDefaults.standard
     enum Keys {
-        static let favouritesKey = "favorites"
+        //static let favouritesKey = "favorites"
         static let favouritesKey2 = "favorites2"
     }
     

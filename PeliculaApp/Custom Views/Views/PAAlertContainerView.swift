@@ -9,7 +9,7 @@
 import UIKit
 
 class PAAlertContainerView: UIView {
-
+    
     override init(frame: CGRect) {
         super.init(frame:frame)
         configure ()
@@ -19,6 +19,7 @@ class PAAlertContainerView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     private func configure () {
         backgroundColor       = .systemBackground

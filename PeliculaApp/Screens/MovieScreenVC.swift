@@ -210,7 +210,7 @@ class MovieScreenVC: UIViewController {
            
         overviewLabel.font              = UIFont.systemFont(ofSize: 14, weight: .regular)
         overviewLabel.lineBreakMode     = .byTruncatingTail
-        overviewLabel.numberOfLines     = 5
+        overviewLabel.numberOfLines     = 7
         overviewLabel.textColor         = .systemGray2
     }
     

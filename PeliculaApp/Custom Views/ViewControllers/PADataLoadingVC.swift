@@ -38,4 +38,11 @@ class PADataLoadingVC: UIViewController {
         }
     }
     
+    
+    func showEmptyStateView(with message: String, in view: UIView) {
+        let emptyStateView = PAEmptyStateView(message: message)
+        emptyStateView.frame = view.bounds
+        view.addSubview(emptyStateView)
+    }
+    
 }

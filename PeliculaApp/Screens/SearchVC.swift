@@ -60,9 +60,10 @@ class SearchVC: UIViewController {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.backgroundColor    = .systemBackground
-        logoImageView.layer.borderWidth  = 2
-        logoImageView.layer.borderColor  = UIColor.systemGray3.cgColor
+        //logoImageView.layer.borderWidth  = 2
+        //logoImageView.layer.borderColor  = UIColor.systemGray3.cgColor
         logoImageView.layer.cornerRadius = 10
+        logoImageView.image = UIImage(named: "logo_bear2")
     }
     
     
@@ -175,38 +176,41 @@ class SearchVC: UIViewController {
             categoryButtonTwo.heightAnchor.constraint(equalToConstant: 50),
             
             categoryButtonOne.topAnchor.constraint(equalTo: categoryButtonTwo.topAnchor),
-            categoryButtonOne.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            categoryButtonOne.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             categoryButtonOne.trailingAnchor.constraint(equalTo: categoryButtonTwo.leadingAnchor),
             categoryButtonOne.heightAnchor.constraint(equalToConstant: 50),
             
             categoryButtonThree.topAnchor.constraint(equalTo: categoryButtonTwo.topAnchor),
             categoryButtonThree.leadingAnchor.constraint(equalTo: categoryButtonTwo.trailingAnchor),
-            categoryButtonThree.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            categoryButtonThree.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             categoryButtonThree.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 
     
     func configureLayout() {
+        
+        let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
+        
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.widthAnchor.constraint(equalToConstant: 180),
-            logoImageView.heightAnchor.constraint(equalToConstant: 180),
+            logoImageView.widthAnchor.constraint(equalToConstant: 220),
+            logoImageView.heightAnchor.constraint(equalToConstant: 220),
             
-            movieTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48),
-            movieTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            movieTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 62),
+            movieTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             movieTextField.widthAnchor.constraint(equalToConstant: 200),
             movieTextField.heightAnchor.constraint(equalToConstant: 50),
             
             goButton.topAnchor.constraint(equalTo: movieTextField.topAnchor),
             goButton.leadingAnchor.constraint(equalTo: movieTextField.trailingAnchor),
-            goButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            goButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             goButton.heightAnchor.constraint(equalToConstant: 50),
             
             textLabel.topAnchor.constraint(equalTo: movieTextField.bottomAnchor, constant: 60),
-            textLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            textLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             textLabel.heightAnchor.constraint(equalToConstant: 24)
         ])
     }

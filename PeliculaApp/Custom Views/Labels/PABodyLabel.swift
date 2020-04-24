@@ -24,7 +24,7 @@ class PABodyLabel: UILabel {
     convenience init(textAlignment: NSTextAlignment) {
            self.init(frame: .zero)
            self.textAlignment = textAlignment
-       }
+    }
     
     
     private func configure () {
