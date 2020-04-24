@@ -16,7 +16,10 @@ enum PersistenceActionType {
 enum PersistenceManager {
     
     static private let defaults = UserDefaults.standard
-    enum Keys { static let favouritesKey = "favorites" }
+    enum Keys {
+        static let favouritesKey = "favorites"
+        static let favouritesKey2 = "favorites2"
+    }
     
     static func updateWith(favoritedMovie: FavoritedMovie, actionType: PersistenceActionType, completed: @escaping (PAError?) -> Void) {
         
@@ -39,39 +42,42 @@ enum PersistenceManager {
                 
             case .failure(let error):
                 completed(error)
+                print ("error inside retrieveFavorites method")
             }
         }
     }
     
     
-    //Get data of already favorited movies
+    //Get data of already favorited movies.. First Decoding then Encoding
     static func retrieveFavorites(completed: @escaping (Result<[FavoritedMovie], PAError>) -> Void) {
         
-        guard let favoritesData = defaults.object(forKey: Keys.favouritesKey) as? Data else {
+        guard let favoritesData = defaults.object(forKey: Keys.favouritesKey2) as? Data else {
             completed(.success([]))
             return
         }
         
         do {
             let decoder = JSONDecoder()
-             let favorites = try decoder.decode([FavoritedMovie].self, from: favoritesData)
+            let favorites = try decoder.decode([FavoritedMovie].self, from: favoritesData)
             completed(.success(favorites))
         } catch {
             completed(.failure(.unableToFavorite))
+            print("unableToFavorite. error - inside do+catch retrieveFavorites")
         }
     }
     
-    
-    //Save new movie to the array of favorited movies
+
+    //Save new movie to the array of favorited movies. Encoding.
     static func save(favoritedMovies: [FavoritedMovie]) -> PAError? { /// if saving is successful, we gonna return 'nil'
         
         do{
             let encoder = JSONEncoder()
             let encodedFavorites = try encoder.encode(favoritedMovies)
-            defaults.set(encodedFavorites, forKey: Keys.favouritesKey)
+            defaults.set(encodedFavorites, forKey: Keys.favouritesKey2)
             return nil /// we are returning 'nil' because no error happens
         } catch {
-             return .unableToFavorite
+            return .unableToFavorite
+            print ("unableToFavorite error in save method")
         }
     }
     

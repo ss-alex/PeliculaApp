@@ -46,9 +46,16 @@ class MovieScreenVC: UIViewController {
        
         configureLayout()
         fetchMovieByID()
+        
+        checkMovieID()
     }
     
     //MARK:- Methods
+    
+    func checkMovieID() {
+        dump(movieID)
+    }
+    
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
@@ -269,6 +276,7 @@ class MovieScreenVC: UIViewController {
             
             switch result {
                 case .success(let movie):
+                    dump(movie)
                     self.addMovieToFavorites(with: movie)
                 
             case .failure(let error):
@@ -279,7 +287,10 @@ class MovieScreenVC: UIViewController {
     
     
     func addMovieToFavorites(with movie: Movie) {
-        let favoritedMovie = FavoritedMovie(title: movie.title)
+        
+        let favoritedMovie = FavoritedMovie(id: movie.id, title: movie.title, posterPath: movie.posterPath)
+        dump(favoritedMovie)
+
         PersistenceManager.updateWith(favoritedMovie: favoritedMovie, actionType: .add) { [weak self] error in
             guard let self = self else { return }
             
@@ -289,9 +300,8 @@ class MovieScreenVC: UIViewController {
             }
             
             self.presentPAAlertOnMainThread(title: "Something went wrong.", message: error.localizedDescription , buttonTitle: "Ok")
+            print("error inside updteWith")
         }
-        
-        
     }
     
 }

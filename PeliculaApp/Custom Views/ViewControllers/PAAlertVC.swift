@@ -13,7 +13,7 @@ class PAAlertVC: UIViewController {
     let containerView       = PAAlertContainerView()
     let titleLabel          = PATitleLabel(textAlignment: .center, fontSize: 20)
     let errorMessageLabel   = PABodyLabel(textAlignment: .center)
-    let actionButton        = PAButton(backgroundColor: .systemPink, tittle: "Ok")
+    let actionButton        = PAButton(backgroundColor: .systemGreen, tittle: "Ok")
     
     let padding: CGFloat    = 20
     

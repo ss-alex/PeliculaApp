@@ -31,6 +31,8 @@
 		D9219DB0244EA620001AA3CB /* PAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DAF244EA620001AA3CB /* PAError.swift */; };
 		D9219DB2244EACBB001AA3CB /* FavoritedMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DB1244EACBB001AA3CB /* FavoritedMovie.swift */; };
 		D9219DB4244EC419001AA3CB /* UITableView+RemoveCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DB3244EC419001AA3CB /* UITableView+RemoveCells.swift */; };
+		D9839D2C24511FE500B10493 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9839D2B24511FE500B10493 /* FavoriteCell.swift */; };
+		D9839D2F245120C500B10493 /* PAPosterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9839D2E245120C500B10493 /* PAPosterImageView.swift */; };
 		D9F9FA46244484A200C3D509 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA45244484A200C3D509 /* NetworkManager.swift */; };
 		D9F9FA48244484E100C3D509 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA47244484E100C3D509 /* Movie.swift */; };
 		D9F9FA4A2444853D00C3D509 /* URLSession+DataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9FA492444853D00C3D509 /* URLSession+DataTask.swift */; };
@@ -66,6 +68,8 @@
 		D9219DAF244EA620001AA3CB /* PAError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAError.swift; sourceTree = "<group>"; };
 		D9219DB1244EACBB001AA3CB /* FavoritedMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritedMovie.swift; sourceTree = "<group>"; };
 		D9219DB3244EC419001AA3CB /* UITableView+RemoveCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+RemoveCells.swift"; sourceTree = "<group>"; };
+		D9839D2B24511FE500B10493 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		D9839D2E245120C500B10493 /* PAPosterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAPosterImageView.swift; sourceTree = "<group>"; };
 		D9F9FA45244484A200C3D509 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D9F9FA47244484E100C3D509 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		D9F9FA492444853D00C3D509 /* URLSession+DataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+DataTask.swift"; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 		D90C33DF2448073900A11397 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				D9839D2D2451208A00B10493 /* ImageViews */,
 				D9154E1A2449E8CF00F900A1 /* ViewControllers */,
 				D9154E172449E79500F900A1 /* Views */,
 				D9154E102449E36F00F900A1 /* Labels */,
@@ -147,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				D9F9FA6D2445C38A00C3D509 /* MovieCell.swift */,
+				D9839D2B24511FE500B10493 /* FavoriteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -239,6 +245,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		D9839D2D2451208A00B10493 /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				D9839D2E245120C500B10493 /* PAPosterImageView.swift */,
+			);
+			path = ImageViews;
+			sourceTree = "<group>";
+		};
 		D9F9FA6F244693BF00C3D509 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +339,7 @@
 				D9219DAC244EA485001AA3CB /* PersistenceManager.swift in Sources */,
 				D9F9FA71244694D900C3D509 /* UIView+PinToEdge.swift in Sources */,
 				D90C33DC244805BF00A11397 /* FavoritesListVC.swift in Sources */,
+				D9839D2F245120C500B10493 /* PAPosterImageView.swift in Sources */,
 				D9F9FA6E2445C38A00C3D509 /* MovieCell.swift in Sources */,
 				D9154E1E2449F95A00F900A1 /* UIVIewController+Alert.swift in Sources */,
 				D9F9FA46244484A200C3D509 /* NetworkManager.swift in Sources */,
@@ -343,6 +358,7 @@
 				D9154E122449E39900F900A1 /* PATitleLabel.swift in Sources */,
 				D90C33E624480A0200A11397 /* PATabBarController.swift in Sources */,
 				D9069491244478650022BE8E /* SceneDelegate.swift in Sources */,
+				D9839D2C24511FE500B10493 /* FavoriteCell.swift in Sources */,
 				D9154E22244AA9FB00F900A1 /* PADataLoadingVC.swift in Sources */,
 				D9F9FA4A2444853D00C3D509 /* URLSession+DataTask.swift in Sources */,
 				D90C33F02448A87C00A11397 /* PopularMoviesVC.swift in Sources */,
