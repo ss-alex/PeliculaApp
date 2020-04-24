@@ -12,29 +12,64 @@ class FavoritesListVC: PADataLoadingVC {
     
     let tableView = UITableView()
     var favoritedMovies: [FavoritedMovie] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
+        configureTableView()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getFavorites()
     }
     
     
     func configureViewController() {
-        view.backgroundColor = .systemBackground
-        title = "Favorites"
+        view.backgroundColor    = .systemBackground
+        title                   = "Favorites"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     
     func configureTableView() {
         view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         
         tableView.frame             = view.bounds
-        tableView.rowHeight         = 80
+        tableView.rowHeight         = 140
         tableView.removeExcessCells()
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseID)
+    }
+    
+    
+    func getFavorites() {
+        PersistenceManager.retrieveFavorites { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let favorites):
+                self.updateUI(with: favorites)
+            case .failure(let error):
+                self.presentPAAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
+            }
+        }
+    }
+    
+    
+    func updateUI(with favoritedMovies: [FavoritedMovie]) {
+        if favoritedMovies.isEmpty {
+            print ("No favorited users")
+        } else {
+            self.favoritedMovies = favoritedMovies
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.view.bringSubviewToFront(self.tableView)
+            }
+        }
     }
     
 }
@@ -46,21 +81,15 @@ extension FavoritesListVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseID, for: indexPath) as! FavoriteCell
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-        //let favoritedMovie = favoritedMovies[indexPath.row]
+        let favoritedMovie = favoritedMovies[indexPath.row]
+        cell.setTextAndImageFor(favorite: favoritedMovie)
         
         return cell
     }
     
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let favoritedMovie = favoritedMovies[indexPath.row]
-        //let destVC         = MovieScreenVC()
-        //navigationController?.pushViewController(destVC, animated: true)
-    }
-    
-    
-    
-    
 }
+
+
