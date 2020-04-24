@@ -76,9 +76,11 @@ class FavoritesListVC: PADataLoadingVC {
 
 
 extension FavoritesListVC: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         favoritedMovies.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseID, for: indexPath) as! FavoriteCell
@@ -89,6 +91,33 @@ extension FavoritesListVC: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let favoritedMovie   = favoritedMovies[indexPath.row]
+        let destVC  = MovieScreenVC()
+        destVC.movieID = favoritedMovie.id
+        let navController = UINavigationController(rootViewController: destVC)
+        present(navController, animated: true)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        guard editingStyle == .delete else { return }
+        
+        PersistenceManager.updateWith(favoritedMovie: favoritedMovies[indexPath.row], actionType: .remove) { [weak self] error in
+            
+            guard let self = self else { return }
+            
+            guard let error = error else {
+                self.favoritedMovies.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .left)
+                return
+            }
+            
+            self.presentPAAlertOnMainThread(title: "Unable to remove", message: error.localizedDescription, buttonTitle: "Ok")
+        }
+    }
     
 }
 

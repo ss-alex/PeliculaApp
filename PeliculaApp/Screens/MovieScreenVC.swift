@@ -295,11 +295,11 @@ class MovieScreenVC: UIViewController {
             guard let self = self else { return }
             
             guard let error = error else {
-                self.presentPAAlertOnMainThread(title: "Success!", message: "You have successfully favorited this movie", buttonTitle: "Hooray!")
+                self.presentPAAlertOnMainThread(title: "Success!", message: "You have successfully favorited this movie.", buttonTitle: "Hooray!")
                 return
             }
             
-            self.presentPAAlertOnMainThread(title: "Something went wrong.", message: error.localizedDescription , buttonTitle: "Ok")
+            self.presentPAAlertOnMainThread(title: "Something went wrong", message: "The movie has been already favorited." , buttonTitle: "Ok")
             print("error inside updteWith")
         }
     }

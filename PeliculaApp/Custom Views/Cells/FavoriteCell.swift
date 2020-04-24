@@ -41,7 +41,7 @@ class FavoriteCell: UITableViewCell {
         movieTitle.translatesAutoresizingMaskIntoConstraints = false
         
         movieTitle.textAlignment = .left
-        movieTitle.font          = UIFont.systemFont(ofSize: 22, weight: .bold)
+        movieTitle.font          = UIFont.systemFont(ofSize: 20, weight: .bold)
         movieTitle.textColor     = .label
         movieTitle.lineBreakMode = .byTruncatingTail
         movieTitle.adjustsFontSizeToFitWidth = false
