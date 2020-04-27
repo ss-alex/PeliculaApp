@@ -21,12 +21,19 @@ class MovieScreenVC: UIViewController {
     let releaseLabel        = UILabel()
     let movieIntroLabel     = UILabel()
     let overviewLabel       = UILabel()
+    let castLabel           = UILabel()
     
     let outerPadding: CGFloat = 20
     
     var movies: [Movie] = []
     var movieID:Int!
-  
+    
+    var collectionView: UICollectionView!
+    var casts: [Cast] = []
+    
+    let scrollView   = UIScrollView()
+    let contentView  = UIView()
+    
     
     //MARK:- Lifecycle
     
@@ -34,6 +41,7 @@ class MovieScreenVC: UIViewController {
     super.viewDidLoad()
     self.view = view
         configureViewController()
+        configureScrollView()
         configureBackdropImageView()
         configurePosterImageView()
         configureScoreLabel()
@@ -43,17 +51,19 @@ class MovieScreenVC: UIViewController {
         configureReleaseLabel()
         configureIntroLabel()
         configureOverviewLabel()
+        configureCastLabel()
+        configureCollectionView()
        
         configureLayout()
-        fetchMovieByID()
-        
-        checkMovieID()
     }
     
-    //MARK:- Methods
+    //MARK:- General Methods
     
-    func checkMovieID() {
-        dump(movieID)
+    override func viewWillAppear(_ animated: Bool) {
+        movies.removeAll()
+        casts.removeAll()
+        fetchMovieByID()
+        fetchCreditsByMovieID()
     }
     
     
@@ -69,6 +79,19 @@ class MovieScreenVC: UIViewController {
     }
     
     
+    func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.pin(to: view)
+        scrollView.addSubview(contentView)
+        contentView.pin(to: scrollView)
+        
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 750)
+        ])
+    }
+    
+    
     public static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, yyyy"
@@ -76,8 +99,6 @@ class MovieScreenVC: UIViewController {
     }()
 
     func fetchMovieByID() {
-        
-        movies.removeAll()
         
         NetworkManager.shared.fetchMovie(movieID: movieID) { (result: Result<Movie, NetworkManager.APIServiceError>) in
             
@@ -120,15 +141,34 @@ class MovieScreenVC: UIViewController {
     }
     
     
+    func fetchCreditsByMovieID() {
+        
+        NetworkManager.shared.fetchCredits(movieID: movieID) { (result: Result<Credits, NetworkManager.APIServiceError>) in
+            
+            switch result {
+            case . success(let cast):
+                print(cast)
+                let castsInfo = cast.cast!
+                self.casts.append(contentsOf: castsInfo)
+                
+                DispatchQueue.main.async { self.collectionView.reloadData() }
+                    
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    
     func configureBackdropImageView() {
-        view.addSubview(backdropImageView)
+        contentView.addSubview(backdropImageView)
         backdropImageView.translatesAutoresizingMaskIntoConstraints = false
         backdropImageView.backgroundColor = .systemGray2
     }
        
        
     func configurePosterImageView() {
-        view.addSubview(posterImageView)
+        contentView.addSubview(posterImageView)
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
         posterImageView.backgroundColor = .systemGray2
            
@@ -140,7 +180,7 @@ class MovieScreenVC: UIViewController {
        
        
     func configureScoreLabel() {
-        view.addSubview(scoreLabel)
+        contentView.addSubview(scoreLabel)
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         scoreLabel.backgroundColor = .systemBlue
         scoreLabel.layer.cornerRadius = 40/2
@@ -154,7 +194,7 @@ class MovieScreenVC: UIViewController {
        
        
     func configureMovieLabel() {
-        view.addSubview(movieTitleLabel)
+        contentView.addSubview(movieTitleLabel)
         movieTitleLabel.translatesAutoresizingMaskIntoConstraints = false
            //movieTitleLabel.backgroundColor            = .systemGray4
         movieTitleLabel.adjustsFontSizeToFitWidth  = true
@@ -167,7 +207,7 @@ class MovieScreenVC: UIViewController {
        
        
     func configureGenreLabel() {
-        view.addSubview(genreLabel)
+        contentView.addSubview(genreLabel)
         genreLabel.translatesAutoresizingMaskIntoConstraints = false
         //genreLabel.backgroundColor = .systemGray5
         genreLabel.font            = UIFont.preferredFont(forTextStyle: .caption1)
@@ -176,7 +216,7 @@ class MovieScreenVC: UIViewController {
        
        
     func configureTimeLabel() {
-        view.addSubview(timeLabel)
+        contentView.addSubview(timeLabel)
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         //timeLabel.backgroundColor = .systemGray5
         timeLabel.font            = UIFont.preferredFont(forTextStyle: .caption1)
@@ -185,7 +225,7 @@ class MovieScreenVC: UIViewController {
        
        
     func configureReleaseLabel() {
-        view.addSubview(releaseLabel)
+        contentView.addSubview(releaseLabel)
         releaseLabel.translatesAutoresizingMaskIntoConstraints = false
         //releaseLabel.backgroundColor = .systemGray5
         releaseLabel.font            = UIFont.preferredFont(forTextStyle: .caption1)
@@ -194,7 +234,7 @@ class MovieScreenVC: UIViewController {
        
        
     func configureIntroLabel() {
-        view.addSubview(movieIntroLabel)
+        contentView.addSubview(movieIntroLabel)
         movieIntroLabel.translatesAutoresizingMaskIntoConstraints = false
         //movieIntroLabel.backgroundColor = .systemGray5
         movieIntroLabel.text            = "Overview"
@@ -204,7 +244,7 @@ class MovieScreenVC: UIViewController {
        
        
     func configureOverviewLabel() {
-        view.addSubview(overviewLabel)
+        contentView.addSubview(overviewLabel)
         overviewLabel.translatesAutoresizingMaskIntoConstraints = false
         //overviewLabel.backgroundColor   = .systemGray5
            
@@ -215,20 +255,53 @@ class MovieScreenVC: UIViewController {
     }
     
     
+    func configureCastLabel() {
+        contentView.addSubview(castLabel)
+        castLabel.translatesAutoresizingMaskIntoConstraints = false
+        //castLabel.backgroundColor   = .systemGray5
+        
+        castLabel.text            = "Cast"
+        castLabel.font            = UIFont.preferredFont(forTextStyle: .headline)
+        castLabel.textColor       = .darkGray
+    }
+    
+    
+
+    func configureCollectionView() {
+        
+        let flowLayout             = PACarouselFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.sideItemScale   = 0.9
+        flowLayout.sideItemAlpha   = 1
+        flowLayout.spacingMode     = .overlap(visibleOffset: 40)
+        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.delegate        = self
+        collectionView.dataSource      = self
+        collectionView.register(CastCustomCell.self, forCellWithReuseIdentifier: "cell")
+    }
+    
+    
+    
     func configureLayout() {
+        
+        contentView.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .systemBackground
+        
         NSLayoutConstraint.activate([
-            backdropImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            backdropImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backdropImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backdropImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            backdropImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            backdropImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             backdropImageView.heightAnchor.constraint(equalToConstant: 240),
                
-            posterImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 174),
-            posterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: outerPadding),
+            posterImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 174),
+            posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: outerPadding),
             posterImageView.widthAnchor.constraint(equalToConstant: 110),
             posterImageView.heightAnchor.constraint(equalToConstant: 160),
                
-            scoreLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 220),
-            scoreLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -outerPadding),
+            scoreLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 220),
+            scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -outerPadding),
             scoreLabel.widthAnchor.constraint(equalToConstant: 40),
             scoreLabel.heightAnchor.constraint(equalToConstant: 40),
                
@@ -239,7 +312,7 @@ class MovieScreenVC: UIViewController {
                
             genreLabel.bottomAnchor.constraint(equalTo: posterImageView.bottomAnchor),
             genreLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 12),
-            genreLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -outerPadding),
+            genreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -outerPadding),
             genreLabel.heightAnchor.constraint(equalToConstant: 18),
                
             timeLabel.bottomAnchor.constraint(equalTo: genreLabel.topAnchor, constant: -2),
@@ -253,15 +326,26 @@ class MovieScreenVC: UIViewController {
             releaseLabel.heightAnchor.constraint(equalToConstant: 18),
                
             movieIntroLabel.topAnchor.constraint(equalTo: posterImageView.bottomAnchor, constant: 26),
-            movieIntroLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: outerPadding),
-            movieIntroLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -outerPadding),
+            movieIntroLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: outerPadding),
+            movieIntroLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -outerPadding),
             movieIntroLabel.heightAnchor.constraint(equalToConstant: 20),
                
             overviewLabel.topAnchor.constraint(equalTo: movieIntroLabel.bottomAnchor, constant: 12),
-            overviewLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: outerPadding),
-            overviewLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -outerPadding)
+            overviewLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: outerPadding),
+            overviewLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -outerPadding),
+            
+            castLabel.topAnchor.constraint(equalTo: overviewLabel.bottomAnchor, constant: 26),
+            castLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: outerPadding),
+            castLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -outerPadding),
+            castLabel.heightAnchor.constraint(equalToConstant: 20),
+            
+            collectionView.topAnchor.constraint(equalTo: castLabel.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 128)
         ])
     }
+    
     
     
     //MARK:- @objc Methods
@@ -305,3 +389,29 @@ class MovieScreenVC: UIViewController {
     }
     
 }
+
+
+//MARK:- Extensions
+extension MovieScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return casts.count
+        //return 3
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CastCustomCell
+        
+        let cast = casts[indexPath.row]
+        cell.setTextAndImageFor(cast: cast)
+        return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width/4.5, height: collectionView.frame.width/4)
+    }
+    
+}
+

@@ -148,6 +148,18 @@ class NetworkManager {
     }
     
     
+    //MARK:- Method for Credits by MovieID
+    public func fetchCredits(movieID: Int, result: @escaping (Result <Credits, APIServiceError>) -> Void) {
+           
+           let movieURL = baseURL
+            .appendingPathComponent("movie")
+            .appendingPathComponent(String(movieID))
+            .appendingPathComponent("credits")
+           
+           fetchMovieInfoByID(url: movieURL, completion: result)
+    }
+    
+    
     //MARK:- Method for a Movie keyword
     public func searchMovie(query: String, page: Int, params: [String : String]?, completion: @escaping (Result<MoviesResponse,APIServiceError>) -> Void) {
         
@@ -195,7 +207,7 @@ class NetworkManager {
             }
         }.resume()
     }
-    
+        
     
     //MARK:- Method DownloadImage
     
