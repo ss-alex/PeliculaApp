@@ -219,36 +219,35 @@ class SearchVC: UIViewController {
     //MARK:- @objc Methods
     
     @objc func pushMovieListVC() {
-        
         guard isUsernameEntered else {
             presentPAAlertOnMainThread(title: "Empty Keyword", message: "Please enter a keyword. We need to know what to look for.", buttonTitle: "Ok")
             return
         }
         view.endEditing(true)
-        
-        let movieListVC = MovieListVC(movieName: movieTextField.text!)
+                
+        let movieListVC = ReusableMovieVC(movieName: movieTextField.text!)
         navigationController?.pushViewController(movieListVC, animated: true)
     }
     
     
    @objc func pushNowPlayingMoviesVC() {
-        let nowPlayingMoviesVC = NowPlayingMoviesVC()
+        let nowPlayingMoviesVC = ReusableMovieVC(movieCategory: "now_playing")
         navigationController?.pushViewController(nowPlayingMoviesVC, animated: true)
     }
     
     
     @objc func pushPopularMoviesVC() {
-        let populaerMoviesVC = PopularMoviesVC()
-        navigationController?.pushViewController(populaerMoviesVC, animated: true)
+        let popularMoviesVC = ReusableMovieVC(movieCategory: "popular")
+        navigationController?.pushViewController(popularMoviesVC, animated: true)
     }
     
     
     @objc func pushTopRatedMoviesVC() {
-        let topRatedMoviesVC = TopRatedMoviesVC()
+        let topRatedMoviesVC = ReusableMovieVC(movieCategory: "top_rated")
         navigationController?.pushViewController(topRatedMoviesVC, animated: true)
     }
-
 }
+
 
 //MARK:- Extensions
 

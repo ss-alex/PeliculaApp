@@ -11,12 +11,12 @@ import UIKit
 
 class NetworkManager {
     
-    enum Endpoint: String, CaseIterable {
+    /*enum Endpoint: String, CaseIterable {
         case nowPlaying = "now_playing"
         case upcoming   = "upcoming"
         case popular    = "popular"
         case topRated   = "top_rated"
-    }
+    }*/ 
     
     
     public enum APIServiceError: String, Error {
@@ -128,10 +128,10 @@ class NetworkManager {
 
     //MARK:- Method for Categories
     
-    public func fetchMovies(from endpoint: Endpoint, page: Int, result: @escaping (Result<MoviesResponse, APIServiceError>) -> Void) {
+    public func fetchMovies(from endpoint: String, page: Int, result: @escaping (Result<MoviesResponse, APIServiceError>) -> Void) {
         let movieURL = baseURL
             .appendingPathComponent("movie")
-            .appendingPathComponent(endpoint.rawValue)
+            .appendingPathComponent(endpoint)
         
         fetchMovieInfo(url: movieURL, page: page, completion: result)
     }
