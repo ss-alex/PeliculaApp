@@ -81,6 +81,8 @@ class MovieCell: UITableViewCell {
         movieImageView.layer.cornerRadius = 10
         movieImageView.clipsToBounds = true
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
+        movieImageView.image = UIImage(named: "placeholder3")
+        movieImageView.contentMode = .scaleAspectFit
     }
     
     

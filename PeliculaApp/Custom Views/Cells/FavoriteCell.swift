@@ -33,6 +33,7 @@ class FavoriteCell: UITableViewCell {
     func configurePosterImage() {
         self.addSubview(posterImage)
         posterImage.translatesAutoresizingMaskIntoConstraints = false
+        posterImage.backgroundColor = .systemGray4
     }
     
     

@@ -35,3 +35,11 @@ enum DeviceTypes {
         return isiPhoneX || isiPhoneXsMaxAndXr
     }
 }
+
+
+enum Endpoint: String, CaseIterable {
+    case nowPlaying = "now_playing"
+    case upcoming   = "upcoming"
+    case popular    = "popular"
+    case topRated   = "top_rated"
+}

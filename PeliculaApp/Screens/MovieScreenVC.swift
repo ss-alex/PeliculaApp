@@ -24,6 +24,11 @@ class MovieScreenVC: UIViewController {
     let castLabel           = UILabel()
     
     let outerPadding: CGFloat = 20
+    public static let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy"
+        return dateFormatter
+    }()
     
     var movies: [Movie] = []
     var movieID:Int!
@@ -40,6 +45,8 @@ class MovieScreenVC: UIViewController {
     override func viewDidLoad() {
     super.viewDidLoad()
     self.view = view
+        fetchMovieByID()
+        fetchCreditsByMovieID()
         configureViewController()
         configureScrollView()
         configureBackdropImageView()
@@ -62,8 +69,6 @@ class MovieScreenVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         movies.removeAll()
         casts.removeAll()
-        fetchMovieByID()
-        fetchCreditsByMovieID()
     }
     
     
@@ -92,14 +97,7 @@ class MovieScreenVC: UIViewController {
     }
     
     
-    public static let dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, yyyy"
-        return dateFormatter
-    }()
-
     func fetchMovieByID() {
-        
         NetworkManager.shared.fetchMovie(movieID: movieID) { (result: Result<Movie, NetworkManager.APIServiceError>) in
             
             switch result {
@@ -142,7 +140,6 @@ class MovieScreenVC: UIViewController {
     
     
     func fetchCreditsByMovieID() {
-        
         NetworkManager.shared.fetchCredits(movieID: movieID) { (result: Result<Credits, NetworkManager.APIServiceError>) in
             
             switch result {
@@ -164,13 +161,15 @@ class MovieScreenVC: UIViewController {
         contentView.addSubview(backdropImageView)
         backdropImageView.translatesAutoresizingMaskIntoConstraints = false
         backdropImageView.backgroundColor = .systemGray2
+        backdropImageView.image           = UIImage(named: "placeholder2")
+        backdropImageView.contentMode     = .scaleAspectFit
     }
        
        
     func configurePosterImageView() {
         contentView.addSubview(posterImageView)
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
-        posterImageView.backgroundColor = .systemGray2
+        posterImageView.backgroundColor = .systemGray3
            
         posterImageView.layer.cornerRadius = 10
         posterImageView.layer.borderWidth = 2
