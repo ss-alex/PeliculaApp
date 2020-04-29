@@ -98,7 +98,9 @@ class MovieScreenVC: UIViewController {
     
     
     func fetchMovieByID() {
-        NetworkManager.shared.fetchMovie(movieID: movieID) { (result: Result<Movie, NetworkManager.APIServiceError>) in
+        self.showLoadingView(onView: self.view)
+        
+        NetworkManager.shared.fetchMovie(movieID: movieID) { (result: Result<Movie, PAError>) in
             
             switch result {
             case . success(let movie):
@@ -129,18 +131,18 @@ class MovieScreenVC: UIViewController {
                     paragraphStyle.lineSpacing = 11
                     attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
                     self.overviewLabel.attributedText = attributedString
-                    
                 }
             
             case .failure(let error):
                 print(error.localizedDescription)
             }
+            self.removeLoadingView()
         }
     }
     
     
     func fetchCreditsByMovieID() {
-        NetworkManager.shared.fetchCredits(movieID: movieID) { (result: Result<Credits, NetworkManager.APIServiceError>) in
+        NetworkManager.shared.fetchCredits(movieID: movieID) { (result: Result<Credits, PAError>) in
             
             switch result {
             case . success(let cast):

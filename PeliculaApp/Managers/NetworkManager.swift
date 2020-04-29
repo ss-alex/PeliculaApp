@@ -11,23 +11,6 @@ import UIKit
 
 class NetworkManager {
     
-    /*enum Endpoint: String, CaseIterable {
-        case nowPlaying = "now_playing"
-        case upcoming   = "upcoming"
-        case popular    = "popular"
-        case topRated   = "top_rated"
-    }*/ 
-    
-    
-    public enum APIServiceError: String, Error {
-        
-        case apiError
-        case invalidEndpoint
-        case invalidResponse
-        case noData             = "The data received from the server was invalid. Please try again."
-        case decodeError
-    }
-    
     public static let shared = NetworkManager()
     
     private init() {}
@@ -51,7 +34,7 @@ class NetworkManager {
     
      //MARK:- General methods
     
-    private func fetchMovieInfo <T: Decodable>(url: URL, page: Int, completion: @escaping (Result<T, APIServiceError>) -> Void) {
+    private func fetchMovieInfo <T: Decodable>(url: URL, page: Int, completion: @escaping (Result<T, PAError>) -> Void) {
         
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             completion(.failure(.invalidEndpoint))
@@ -83,13 +66,13 @@ class NetworkManager {
                 }
             case .failure(let error):
                 completion(.failure(.apiError))
-                print("error message: \(error.localizedDescription)")
+                print ("\(error.localizedDescription)")
             }
         }.resume()
     }
     
     
-    private func fetchMovieInfoByID <T: Decodable>(url: URL, completion: @escaping (Result<T, APIServiceError>) -> Void) {
+    private func fetchMovieInfoByID <T: Decodable>(url: URL, completion: @escaping (Result<T, PAError>) -> Void) {
         
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             completion(.failure(.invalidEndpoint))
@@ -120,7 +103,7 @@ class NetworkManager {
                 }
             case .failure(let error):
                 completion(.failure(.apiError))
-                print("error message: \(error.localizedDescription)")
+                print ("\(error.localizedDescription)")
             }
         }.resume()
     }
@@ -128,7 +111,7 @@ class NetworkManager {
 
     //MARK:- Method for Categories
     
-    public func fetchMovies(from endpoint: String, page: Int, result: @escaping (Result<MoviesResponse, APIServiceError>) -> Void) {
+    public func fetchMovies(from endpoint: String, page: Int, result: @escaping (Result<MoviesResponse, PAError>) -> Void) {
         let movieURL = baseURL
             .appendingPathComponent("movie")
             .appendingPathComponent(endpoint)
@@ -138,7 +121,7 @@ class NetworkManager {
     
     
     //MARK:- Method for MovieID
-    public func fetchMovie(movieID: Int, result: @escaping (Result <Movie, APIServiceError>) -> Void) {
+    public func fetchMovie(movieID: Int, result: @escaping (Result <Movie, PAError>) -> Void) {
         
         let movieURL = baseURL
         .appendingPathComponent("movie")
@@ -149,7 +132,7 @@ class NetworkManager {
     
     
     //MARK:- Method for Credits by MovieID
-    public func fetchCredits(movieID: Int, result: @escaping (Result <Credits, APIServiceError>) -> Void) {
+    public func fetchCredits(movieID: Int, result: @escaping (Result <Credits, PAError>) -> Void) {
            
            let movieURL = baseURL
             .appendingPathComponent("movie")
@@ -161,7 +144,7 @@ class NetworkManager {
     
     
     //MARK:- Method for a Movie keyword
-    public func searchMovie(query: String, page: Int, params: [String : String]?, completion: @escaping (Result<MoviesResponse,APIServiceError>) -> Void) {
+    public func searchMovie(query: String, page: Int, params: [String : String]?, completion: @escaping (Result<MoviesResponse,PAError>) -> Void) {
         
         guard var urlComponents = URLComponents(string: "\(baseURL)/search/movie") else {
             completion(.failure(.invalidEndpoint))

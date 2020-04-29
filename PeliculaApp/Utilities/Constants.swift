@@ -37,9 +37,12 @@ enum DeviceTypes {
 }
 
 
-enum Endpoint: String, CaseIterable {
-    case nowPlaying = "now_playing"
-    case upcoming   = "upcoming"
-    case popular    = "popular"
-    case topRated   = "top_rated"
+enum MovieCategory: String {
+    case popular    = "Popular"
+    case nowPlaying = "Now Playing"
+    case topRated   = "Top Rated"
 }
+
+
+
+

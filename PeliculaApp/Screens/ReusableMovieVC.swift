@@ -90,14 +90,14 @@ class ReusableMovieVC: UIViewController {
         }
         else {
             if movieCategory == "popular" {
-                self.title = "Popular"
+                self.title = MovieCategory.popular.rawValue
                 fetchCategoryMovies(page: page, category: "popular")
             }
             else if movieCategory == "now_playing" {
-                self.title = "Now Playing"
+                self.title = MovieCategory.nowPlaying.rawValue
                 fetchCategoryMovies(page: page, category: "now_playing")
             } else {
-                self.title = "Top Rated"
+                self.title = MovieCategory.topRated.rawValue
                 fetchCategoryMovies(page: page, category: "top_rated")
             }
         }
@@ -105,12 +105,14 @@ class ReusableMovieVC: UIViewController {
     
     
     func searchMovies(query: String, page: Int) {
-        
         isLoadingMoreMovies = true
-        NetworkManager.shared.searchMovie(query: query, page: page, params: nil) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
-
+        self.showLoadingView(onView: self.view)
+        
+        NetworkManager.shared.searchMovie(query: query, page: page, params: nil) { (result: Result<MoviesResponse, PAError>) in
             switch result {
             case . success(let movieResponse):
+                self.removeLoadingView()
+                
                 let moviesInSearch = movieResponse.results
                 print ("\(moviesInSearch)")
                 self.movies.append(contentsOf: moviesInSearch)
@@ -126,9 +128,10 @@ class ReusableMovieVC: UIViewController {
     
     
     func fetchCategoryMovies(page: Int, category: String) {
-        
         isLoadingMoreMovies = true
-        NetworkManager.shared.fetchMovies(from: category, page: page) { (result: Result<MoviesResponse, NetworkManager.APIServiceError>) in
+        self.showLoadingView(onView: self.view)
+        
+        NetworkManager.shared.fetchMovies(from: category, page: page) { (result: Result<MoviesResponse, PAError>) in
             
             switch result {
             case .success(let movieResponse):
@@ -137,11 +140,12 @@ class ReusableMovieVC: UIViewController {
                 print("\(movies)")
                 self.categoryMovies.append(contentsOf: movies)
                 DispatchQueue.main.async { self.tableView.reloadData() }
-                
+                                
             case .failure(let error):
                 print(error.localizedDescription)
             }
             self.isLoadingMoreMovies = false
+            self.removeLoadingView()
         }
     }
     
@@ -207,6 +211,7 @@ extension ReusableMovieVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
         if movieName != nil {
             let movie = movies[indexPath.row]
             let destVC  = MovieScreenVC()
