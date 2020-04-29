@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesListVC: PADataLoadingVC {
+class FavoritesListVC: UIViewController {
     
     let tableView = UITableView()
     var favoritedMovies: [FavoritedMovie] = []
@@ -47,15 +47,19 @@ class FavoritesListVC: PADataLoadingVC {
     
     
     func getFavorites() {
+        self.showLoadingView(onView: self.view)
+        
         PersistenceManager.retrieveFavorites { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let favorites):
                 self.updateUI(with: favorites)
+                
             case .failure(let error):
                 self.presentPAAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
             }
+            self.removeLoadingView()
         }
     }
     
