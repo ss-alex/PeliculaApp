@@ -27,7 +27,7 @@ class FavoritesListVC: UIViewController {
     
     
     func configureViewController() {
-        view.backgroundColor    = .systemBackground
+        view.backgroundColor    = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
         title                   = "Favorites"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -35,6 +35,7 @@ class FavoritesListVC: UIViewController {
     
     func configureTableView() {
         view.addSubview(tableView)
+        tableView.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
         
         tableView.frame             = view.bounds
         tableView.rowHeight         = 140

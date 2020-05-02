@@ -9,18 +9,19 @@
 import UIKit
 
 class ReusableMovieVC: UIViewController {
+    
+    enum State {
+        case name(String)
+        case category(MovieCategory)
+    }
+    
 
     let tableView = UITableView()
-    
-    var movieName: String!
+    var state: State
     var movies: [Movie] = []
-    
-    var movieCategory: String?
-    var categoryMovies: [Movie] = []
     
     var page = 1
     var isLoadingMoreMovies = false
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,19 +35,12 @@ class ReusableMovieVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.tabBarController?.tabBar.isHidden = true
         movies.removeAll()
-        categoryMovies.removeAll()
     }
     
     
-    init (movieName: String) {
+    init (state: State) {
+        self.state = state
         super.init(nibName: nil, bundle: nil)
-        self.movieName = movieName
-    }
-    
-    
-    init (movieCategory: String) {
-        super.init(nibName: nil, bundle: nil)
-        self.movieCategory = movieCategory
     }
     
     
@@ -82,24 +76,15 @@ class ReusableMovieVC: UIViewController {
     
     
     func conditionalFetchMethod () {
-        dump(movieName)
-        dump(movieCategory)
-        if movieName != nil {
+        dump(state)
+        
+        switch state {
+        case .name(let movieName):
             self.title = movieName
             searchMovies(query: movieName, page: page)
-        }
-        else {
-            if movieCategory == "popular" {
-                self.title = MovieCategory.popular.rawValue
-                fetchCategoryMovies(page: page, category: "popular")
-            }
-            else if movieCategory == "now_playing" {
-                self.title = MovieCategory.nowPlaying.rawValue
-                fetchCategoryMovies(page: page, category: "now_playing")
-            } else {
-                self.title = MovieCategory.topRated.rawValue
-                fetchCategoryMovies(page: page, category: "top_rated")
-            }
+        case .category(let movieCategory):
+            self.title = movieCategory.title
+            fetchCategoryMovies(page: page, category: movieCategory.rawValue)
         }
     }
     
@@ -138,7 +123,7 @@ class ReusableMovieVC: UIViewController {
                 print(movieResponse.results)
                 let movies = movieResponse.results
                 print("\(movies)")
-                self.categoryMovies.append(contentsOf: movies)
+                self.movies.append(contentsOf: movies)
                 DispatchQueue.main.async { self.tableView.reloadData() }
                                 
             case .failure(let error):
@@ -155,24 +140,15 @@ class ReusableMovieVC: UIViewController {
 extension ReusableMovieVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if movieName != nil {
-            return movies.count
-        } else {
-            return categoryMovies.count
-        }
+        return movies.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MovieCell.reuseID, for: indexPath) as! MovieCell
-        
-        if movieName != nil {
-            let movie = movies[indexPath.row]
-            cell.set(movie: movie)
-        } else {
-            let movie = categoryMovies[indexPath.row]
-            cell.set(movie: movie)
-        }
+                
+        let movie = movies[indexPath.row]
+        cell.set(movie: movie)
         return cell
     }
     
@@ -192,18 +168,11 @@ extension ReusableMovieVC: UITableViewDelegate, UITableViewDataSource {
             guard !isLoadingMoreMovies else { return }
             page += 1
             
-            if movieName != nil {
+            switch state {
+            case .name(let movieName):
                 searchMovies(query: movieName, page: page)
-            }
-            else {
-                if movieCategory == "popular" {
-                    fetchCategoryMovies(page: page, category: "popular")
-                }
-                else if movieCategory == "now_playing" {
-                    fetchCategoryMovies(page: page, category: "now_playing")
-                } else {
-                    fetchCategoryMovies(page: page, category: "top_rated")
-                }
+            case .category(let movieCategory):
+                fetchCategoryMovies(page: page, category: movieCategory.rawValue)
             }
         }
     }
@@ -211,20 +180,12 @@ extension ReusableMovieVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        if movieName != nil {
-            let movie = movies[indexPath.row]
-            let destVC  = MovieScreenVC()
-            destVC.movieID = movie.id
-            let navController = UINavigationController(rootViewController: destVC)
-            present(navController, animated: true)
-        } else {
-            let movie = categoryMovies[indexPath.row]
-            let destVC  = MovieScreenVC()
-            destVC.movieID = movie.id
-            let navController = UINavigationController(rootViewController: destVC)
-            present(navController, animated: true)
-        }
+    
+        let movie = movies[indexPath.row]
+        let destVC  = MovieScreenVC()
+        destVC.movieID = movie.id
+        let navController = UINavigationController(rootViewController: destVC)
+        present(navController, animated: true)
     }
     
 }

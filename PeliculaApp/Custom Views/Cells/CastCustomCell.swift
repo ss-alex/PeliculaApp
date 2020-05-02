@@ -19,7 +19,7 @@ class CastCustomCell: UICollectionViewCell {
         configureCastImageView()
         configureCastNameLabel()
         configureLayout()
-        //self.backgroundColor = .purple
+        self.backgroundColor = .clear
     }
     
     
@@ -55,7 +55,7 @@ class CastCustomCell: UICollectionViewCell {
         castNameLabel.numberOfLines     = 2
         castNameLabel.lineBreakMode     = .byTruncatingTail
         castNameLabel.font              = UIFont.preferredFont(forTextStyle: .caption1)
-        castNameLabel.textColor         = .systemGray
+        castNameLabel.textColor         = .darkGray
     }
     
     

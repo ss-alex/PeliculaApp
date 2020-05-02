@@ -26,7 +26,7 @@ class SearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
         
         createDismissKeyboardGesture()
         configureLogoImageView()
@@ -59,11 +59,8 @@ class SearchVC: UIViewController {
     func configureLogoImageView() {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.backgroundColor    = .systemBackground
-        //logoImageView.layer.borderWidth  = 2
-        //logoImageView.layer.borderColor  = UIColor.systemGray3.cgColor
         logoImageView.layer.cornerRadius = 10
-        logoImageView.image = UIImage(named: "logo_bear2")
+        logoImageView.image = UIImage(named: "logo_pelicula")
     }
     
     
@@ -95,7 +92,7 @@ class SearchVC: UIViewController {
         goButton.translatesAutoresizingMaskIntoConstraints = false
         goButton.addTarget(self, action: #selector(pushMovieListVC), for: .touchUpInside)
         
-        goButton.backgroundColor       = .systemBlue
+        goButton.backgroundColor       = UIColor(red: 252/255, green: 97/255, blue: 97/255, alpha: 1)
         goButton.layer.cornerRadius    = 10
         goButton.layer.maskedCorners   = [.layerMaxXMinYCorner,.layerMaxXMaxYCorner]
         
@@ -111,7 +108,7 @@ class SearchVC: UIViewController {
         
         textLabel.text           = "Choose a category"
         textLabel.textColor      = .systemGray
-        textLabel.font           = UIFont.systemFont(ofSize: 16, weight: .light)
+        textLabel.font           = UIFont.systemFont(ofSize: 16, weight: .regular)
         textLabel.numberOfLines  = 1
         textLabel.textAlignment  = .left
     }
@@ -124,11 +121,12 @@ class SearchVC: UIViewController {
         categoryButtonTwo.addTarget(self, action: #selector(pushNowPlayingMoviesVC), for: .touchUpInside)
         
         categoryButtonTwo.setTitle("Now Playing", for: .normal)
-        categoryButtonTwo.setTitleColor(.systemBlue, for: .normal)
         categoryButtonTwo.titleLabel?.font    = UIFont.preferredFont(forTextStyle: .headline)
-        categoryButtonTwo.backgroundColor     = .systemGray4
+        categoryButtonTwo.setTitleColor(UIColor.init(red: 90/255, green: 120/255, blue: 158/255, alpha: 1), for: .normal)
+   
+        categoryButtonTwo.backgroundColor     = UIColor(red: 255/255, green: 205/255, blue: 203/255, alpha: 1)
         categoryButtonTwo.layer.borderWidth   = 1
-        categoryButtonTwo.layer.borderColor   = UIColor.systemBackground.cgColor
+        categoryButtonTwo.layer.borderColor   = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1).cgColor
     }
     
     
@@ -138,14 +136,16 @@ class SearchVC: UIViewController {
         categoryButtonOne.addTarget(self, action: #selector(pushPopularMoviesVC), for: .touchUpInside)
         
         categoryButtonOne.setTitle("Popular", for: .normal)
-        categoryButtonOne.setTitleColor(.systemBlue, for: .normal)
         categoryButtonOne.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        categoryButtonOne.backgroundColor  = .systemGray4
+        categoryButtonOne.setTitleColor(UIColor.init(red: 90/255, green: 120/255, blue: 158/255, alpha: 1), for: .normal)
+        
+        categoryButtonOne.backgroundColor      = UIColor(red: 255/255, green: 205/255, blue: 203/255, alpha: 1)
         
         categoryButtonOne.layer.borderWidth    = 1
         categoryButtonOne.layer.borderColor    = UIColor.systemBackground.cgColor
         categoryButtonOne.layer.cornerRadius   = 10
         categoryButtonOne.layer.maskedCorners  = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
+        categoryButtonOne.layer.borderColor   = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1).cgColor
     }
     
     
@@ -155,14 +155,15 @@ class SearchVC: UIViewController {
         categoryButtonThree.addTarget(self, action: #selector(pushTopRatedMoviesVC), for: .touchUpInside)
         
         categoryButtonThree.setTitle("Top Rated", for: .normal)
-        categoryButtonThree.setTitleColor(.systemBlue, for: .normal)
         categoryButtonThree.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        categoryButtonThree.backgroundColor  = .systemGray4
+        categoryButtonThree.setTitleColor(UIColor.init(red: 90/255, green: 120/255, blue: 158/255, alpha: 1), for: .normal)
+        categoryButtonThree.backgroundColor      = UIColor(red: 255/255, green: 205/255, blue: 203/255, alpha: 1)
         
         categoryButtonThree.layer.borderWidth    = 1
         categoryButtonThree.layer.borderColor    = UIColor.systemBackground.cgColor
         categoryButtonThree.layer.cornerRadius   = 10
         categoryButtonThree.layer.maskedCorners  = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+        categoryButtonThree.layer.borderColor   = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1).cgColor
     }
     
     
@@ -171,7 +172,7 @@ class SearchVC: UIViewController {
         
         NSLayoutConstraint.activate([
             categoryButtonTwo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            categoryButtonTwo.topAnchor.constraint(greaterThanOrEqualTo: textLabel.bottomAnchor, constant: 10),
+            categoryButtonTwo.topAnchor.constraint(greaterThanOrEqualTo: textLabel.bottomAnchor, constant: 7),
             categoryButtonTwo.widthAnchor.constraint(equalToConstant: 110),
             categoryButtonTwo.heightAnchor.constraint(equalToConstant: 50),
             
@@ -190,15 +191,15 @@ class SearchVC: UIViewController {
     
     func configureLayout() {
         
-        let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
+        let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 130
         
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.widthAnchor.constraint(equalToConstant: 220),
-            logoImageView.heightAnchor.constraint(equalToConstant: 220),
+            logoImageView.widthAnchor.constraint(equalToConstant: 240),
+            logoImageView.heightAnchor.constraint(equalToConstant: 115),
             
-            movieTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 62),
+            movieTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 155),
             movieTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             movieTextField.widthAnchor.constraint(equalToConstant: 200),
             movieTextField.heightAnchor.constraint(equalToConstant: 50),
@@ -208,8 +209,8 @@ class SearchVC: UIViewController {
             goButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             goButton.heightAnchor.constraint(equalToConstant: 50),
             
-            textLabel.topAnchor.constraint(equalTo: movieTextField.bottomAnchor, constant: 60),
-            textLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            textLabel.topAnchor.constraint(equalTo: movieTextField.bottomAnchor, constant: 40),
+            textLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
             textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             textLabel.heightAnchor.constraint(equalToConstant: 24)
         ])
@@ -225,25 +226,25 @@ class SearchVC: UIViewController {
         }
         view.endEditing(true)
                 
-        let movieListVC = ReusableMovieVC(movieName: movieTextField.text!)
+        let movieListVC = ReusableMovieVC(state: .name(movieTextField.text!))
         navigationController?.pushViewController(movieListVC, animated: true)
     }
     
     
    @objc func pushNowPlayingMoviesVC() {
-        let nowPlayingMoviesVC = ReusableMovieVC(movieCategory: "now_playing")
+        let nowPlayingMoviesVC = ReusableMovieVC(state: .category(.nowPlaying))
         navigationController?.pushViewController(nowPlayingMoviesVC, animated: true)
     }
     
     
     @objc func pushPopularMoviesVC() {
-        let popularMoviesVC = ReusableMovieVC(movieCategory: "popular")
+        let popularMoviesVC = ReusableMovieVC(state: .category(.popular))
         navigationController?.pushViewController(popularMoviesVC, animated: true)
     }
     
     
     @objc func pushTopRatedMoviesVC() {
-        let topRatedMoviesVC = ReusableMovieVC(movieCategory: "top_rated")
+        let topRatedMoviesVC = ReusableMovieVC(state: .category(.topRated))
         navigationController?.pushViewController(topRatedMoviesVC, animated: true)
     }
 }

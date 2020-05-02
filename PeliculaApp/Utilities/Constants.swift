@@ -37,12 +37,5 @@ enum DeviceTypes {
 }
 
 
-enum MovieCategory: String {
-    case popular    = "Popular"
-    case nowPlaying = "Now Playing"
-    case topRated   = "Top Rated"
-}
-
-
 
 

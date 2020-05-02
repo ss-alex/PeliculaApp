@@ -10,8 +10,6 @@ import UIKit
 
 class MovieCell: UITableViewCell {
     
-   // var link: MovieListVC?
-
     static let reuseID = "MovieCell"
     
     let backView = UIView()

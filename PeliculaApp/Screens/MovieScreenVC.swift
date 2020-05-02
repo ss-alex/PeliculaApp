@@ -73,14 +73,14 @@ class MovieScreenVC: UIViewController {
     
     
     func configureViewController() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissUserInfoVC))
         navigationItem.leftBarButtonItem = doneButton
-        navigationItem.leftBarButtonItem?.tintColor = .systemBlue
+        navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 252/255, green: 97/255, blue: 97/255, alpha: 1)
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
-        navigationItem.rightBarButtonItem?.tintColor = .systemBlue
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 252/255, green: 97/255, blue: 97/255, alpha: 1)
     }
     
     
@@ -183,7 +183,8 @@ class MovieScreenVC: UIViewController {
     func configureScoreLabel() {
         contentView.addSubview(scoreLabel)
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        scoreLabel.backgroundColor = .systemBlue
+        //scoreLabel.backgroundColor = .systemBlue
+        scoreLabel.backgroundColor = UIColor(red: 252/255, green: 97/255, blue: 97/255, alpha: 1)
         scoreLabel.layer.cornerRadius = 40/2
         scoreLabel.clipsToBounds = true
         
@@ -212,7 +213,7 @@ class MovieScreenVC: UIViewController {
         genreLabel.translatesAutoresizingMaskIntoConstraints = false
         //genreLabel.backgroundColor = .systemGray5
         genreLabel.font            = UIFont.preferredFont(forTextStyle: .caption1)
-        genreLabel.textColor       = .systemGray
+        genreLabel.textColor       = .darkGray
     }
        
        
@@ -221,7 +222,7 @@ class MovieScreenVC: UIViewController {
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         //timeLabel.backgroundColor = .systemGray5
         timeLabel.font            = UIFont.preferredFont(forTextStyle: .caption1)
-        timeLabel.textColor       = .systemGray
+        timeLabel.textColor       = .darkGray
     }
        
        
@@ -230,7 +231,7 @@ class MovieScreenVC: UIViewController {
         releaseLabel.translatesAutoresizingMaskIntoConstraints = false
         //releaseLabel.backgroundColor = .systemGray5
         releaseLabel.font            = UIFont.preferredFont(forTextStyle: .caption1)
-        releaseLabel.textColor       = .systemGray
+        releaseLabel.textColor       = .darkGray
        }
        
        
@@ -252,7 +253,7 @@ class MovieScreenVC: UIViewController {
         overviewLabel.font              = UIFont.systemFont(ofSize: 14, weight: .regular)
         overviewLabel.lineBreakMode     = .byTruncatingTail
         overviewLabel.numberOfLines     = 7
-        overviewLabel.textColor         = .systemGray2
+        overviewLabel.textColor         = .darkGray
     }
     
     
@@ -269,6 +270,7 @@ class MovieScreenVC: UIViewController {
     
 
     func configureCollectionView() {
+        
         
         let flowLayout             = PACarouselFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -288,20 +290,20 @@ class MovieScreenVC: UIViewController {
         
         contentView.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
         
         NSLayoutConstraint.activate([
             backdropImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             backdropImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             backdropImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            backdropImageView.heightAnchor.constraint(equalToConstant: 240),
+            backdropImageView.heightAnchor.constraint(equalToConstant: 230),
                
-            posterImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 174),
+            posterImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 164),
             posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: outerPadding),
             posterImageView.widthAnchor.constraint(equalToConstant: 110),
             posterImageView.heightAnchor.constraint(equalToConstant: 160),
                
-            scoreLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 220),
+            scoreLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 210),
             scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -outerPadding),
             scoreLabel.widthAnchor.constraint(equalToConstant: 40),
             scoreLabel.heightAnchor.constraint(equalToConstant: 40),

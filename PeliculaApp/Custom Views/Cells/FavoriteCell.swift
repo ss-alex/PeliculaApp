@@ -13,7 +13,6 @@ class FavoriteCell: UITableViewCell {
     static let reuseID = "FavoriteCell"
     
     let posterImage = PAPosterImageView(frame: .zero)
-    //let movieTitle  = PATitleLabel(textAlignment: .left, fontSize: 24)
     let movieTitle  = UILabel()
 
     
@@ -34,6 +33,9 @@ class FavoriteCell: UITableViewCell {
         self.addSubview(posterImage)
         posterImage.translatesAutoresizingMaskIntoConstraints = false
         posterImage.backgroundColor = .systemGray4
+        
+        posterImage.image = UIImage(named: "placeholder3")
+        posterImage.contentMode = .scaleAspectFit
     }
     
     
@@ -53,6 +55,7 @@ class FavoriteCell: UITableViewCell {
     
     private func configureLayout() {
         accessoryType       = .disclosureIndicator
+        
         let padding:CGFloat = 12
         
         NSLayoutConstraint.activate([
@@ -63,7 +66,6 @@ class FavoriteCell: UITableViewCell {
             
             movieTitle.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             movieTitle.leadingAnchor.constraint(equalTo: posterImage.trailingAnchor, constant: 24),
-            //movieTitle.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
             movieTitle.widthAnchor.constraint(equalToConstant: 200),
             movieTitle.heightAnchor.constraint(equalToConstant: 60)
         ])
