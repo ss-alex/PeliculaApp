@@ -1,8 +1,9 @@
 # PeliculaApp
 
+###Movie searching app 
 App that connects users with the world of movies.
 
-That app is in progress now.
+Task
 
 Features (must have):
 - search for movies by a word
