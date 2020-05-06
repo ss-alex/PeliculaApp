@@ -9,39 +9,38 @@
 
 import Foundation
 
-public struct MoviesResponse: Codable {
+struct MoviesResponse: Codable {
     
-    public let page: Int
-    public let totalResults: Int
-    public let totalPages: Int
-    public let results: [Movie]
+    let page: Int
+    let totalResults: Int
+    let totalPages: Int
+    let results: [Movie]
 }
 
 
-public struct Movie: Codable {
+struct Movie: Codable {
     
-    
-    public let id: Int
-    public let title: String
-    public let overview: String
-    public let releaseDate: Date
-    public let voteAverage: Double
-    public let voteCount: Int
-    public let adult: Bool
-    public let runtime: Int?
-    public let genres: [MovieGenre]?
-    public let backdropPath: String?
-    public let posterPath: String?
-    public var posterURL: URL {
+    let id: Int
+    let title: String
+    let overview: String
+    let releaseDate: Date
+    let voteAverage: Double
+    let voteCount: Int
+    let adult: Bool
+    let runtime: Int?
+    let genres: [MovieGenre]?
+    let backdropPath: String?
+    let posterPath: String?
+    var posterURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
     }
-    public var backdropURL: URL {
+    var backdropURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/original\(backdropPath ?? "")")!
     }
 }
 
 
-public struct MovieGenre: Codable {
+struct MovieGenre: Codable {
     let name: String
 }
 

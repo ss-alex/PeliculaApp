@@ -2,7 +2,7 @@
 //  ReusableMovieVC.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/29.
+//  Created by Alexey Kirpichnikov on 2020/4/29.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 
@@ -76,8 +76,7 @@ class ReusableMovieVC: UIViewController {
     
     
     func conditionalFetchMethod () {
-        dump(state)
-        
+
         switch state {
         case .name(let movieName):
             self.title = movieName
@@ -146,7 +145,11 @@ extension ReusableMovieVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MovieCell.reuseID, for: indexPath) as! MovieCell
-                
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = Colors.customPink.color
+        cell.selectedBackgroundView = backgroundView
+        
         let movie = movies[indexPath.row]
         cell.set(movie: movie)
         return cell
@@ -180,12 +183,25 @@ extension ReusableMovieVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    
+        
         let movie = movies[indexPath.row]
         let destVC  = MovieScreenVC()
         destVC.movieID = movie.id
+        
         let navController = UINavigationController(rootViewController: destVC)
         present(navController, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let rotationTransform   = CATransform3DTranslate(CATransform3DIdentity, 0, 60, 0)
+        cell.layer.transform    = rotationTransform
+        
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.75) {
+            cell.layer.transform = CATransform3DIdentity
+            cell.alpha = 1.0
+        }
     }
     
 }

@@ -2,7 +2,7 @@
 //  PABodyLabel.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/17.
+//  Created by Alexey Kirpichnikov on 2020/4/17.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 
@@ -28,11 +28,11 @@ class PABodyLabel: UILabel {
     
     
     private func configure () {
-        textColor                           = .secondaryLabel /// lightGray
+        textColor                           = .secondaryLabel 
         font                                = UIFont.preferredFont(forTextStyle: .body)
         adjustsFontForContentSizeCategory   = true
         adjustsFontSizeToFitWidth           = true
-        minimumScaleFactor                  = 0.75 /// don't shrink font more that 75%
+        minimumScaleFactor                  = 0.75
         lineBreakMode                       = .byWordWrapping
         translatesAutoresizingMaskIntoConstraints = false
     }

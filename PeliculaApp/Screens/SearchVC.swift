@@ -26,7 +26,7 @@ class SearchVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
+        view.backgroundColor = Colors.customGrayBackground.color
         
         createDismissKeyboardGesture()
         configureLogoImageView()
@@ -60,7 +60,7 @@ class SearchVC: UIViewController {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.layer.cornerRadius = 10
-        logoImageView.image = UIImage(named: "logo_pelicula")
+        logoImageView.image              = UIImage(named: "logo_pelicula")
     }
     
     
@@ -74,10 +74,10 @@ class SearchVC: UIViewController {
         movieTextField.layer.borderWidth   = 2
         movieTextField.layer.borderColor   = UIColor.systemGray4.cgColor
         
-        movieTextField.placeholder    = "Enter a keyword"
-        movieTextField.textColor      = .label
-        movieTextField.textAlignment  = .center
-        movieTextField.font           = UIFont.preferredFont(forTextStyle: .title2)
+        movieTextField.placeholder               = "Enter a keyword"
+        movieTextField.textColor                 = .label
+        movieTextField.textAlignment             = .center
+        movieTextField.font                      = UIFont.preferredFont(forTextStyle: .title2)
         movieTextField.adjustsFontSizeToFitWidth = true
         movieTextField.minimumFontSize           = 12
         
@@ -92,13 +92,13 @@ class SearchVC: UIViewController {
         goButton.translatesAutoresizingMaskIntoConstraints = false
         goButton.addTarget(self, action: #selector(pushMovieListVC), for: .touchUpInside)
         
-        goButton.backgroundColor       = UIColor(red: 252/255, green: 97/255, blue: 97/255, alpha: 1)
+        goButton.backgroundColor       = Colors.customRed.color
         goButton.layer.cornerRadius    = 10
         goButton.layer.maskedCorners   = [.layerMaxXMinYCorner,.layerMaxXMaxYCorner]
         
         goButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        goButton.setTitle("Go", for: .normal)
         goButton.setTitleColor(.white, for: .normal)
+        goButton.setTitle("Go", for: .normal)
     }
         
     
@@ -114,19 +114,18 @@ class SearchVC: UIViewController {
     }
     
     
-    
     func configureCategoryButtonTwo() {
         view.addSubview(categoryButtonTwo)
         categoryButtonTwo.translatesAutoresizingMaskIntoConstraints = false
         categoryButtonTwo.addTarget(self, action: #selector(pushNowPlayingMoviesVC), for: .touchUpInside)
         
-        categoryButtonTwo.setTitle("Now Playing", for: .normal)
         categoryButtonTwo.titleLabel?.font    = UIFont.preferredFont(forTextStyle: .headline)
-        categoryButtonTwo.setTitleColor(UIColor.init(red: 90/255, green: 120/255, blue: 158/255, alpha: 1), for: .normal)
+        categoryButtonTwo.setTitleColor(.white, for: .normal)
+        categoryButtonTwo.setTitle("Now Playing", for: .normal)
    
-        categoryButtonTwo.backgroundColor     = UIColor(red: 255/255, green: 205/255, blue: 203/255, alpha: 1)
-        categoryButtonTwo.layer.borderWidth   = 1
-        categoryButtonTwo.layer.borderColor   = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1).cgColor
+        categoryButtonTwo.backgroundColor = UIColor.systemGray
+        categoryButtonTwo.layer.borderWidth  = 1
+        categoryButtonTwo.layer.borderColor  = Colors.customGrayBackground.color.cgColor
     }
     
     
@@ -137,15 +136,14 @@ class SearchVC: UIViewController {
         
         categoryButtonOne.setTitle("Popular", for: .normal)
         categoryButtonOne.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        categoryButtonOne.setTitleColor(UIColor.init(red: 90/255, green: 120/255, blue: 158/255, alpha: 1), for: .normal)
+        categoryButtonOne.setTitleColor(.white, for: .normal)
         
-        categoryButtonOne.backgroundColor      = UIColor(red: 255/255, green: 205/255, blue: 203/255, alpha: 1)
-        
+        categoryButtonOne.backgroundColor = UIColor.systemGray
         categoryButtonOne.layer.borderWidth    = 1
         categoryButtonOne.layer.borderColor    = UIColor.systemBackground.cgColor
         categoryButtonOne.layer.cornerRadius   = 10
         categoryButtonOne.layer.maskedCorners  = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
-        categoryButtonOne.layer.borderColor   = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1).cgColor
+        categoryButtonOne.layer.borderColor    = Colors.customGrayBackground.color.cgColor
     }
     
     
@@ -156,16 +154,15 @@ class SearchVC: UIViewController {
         
         categoryButtonThree.setTitle("Top Rated", for: .normal)
         categoryButtonThree.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        categoryButtonThree.setTitleColor(UIColor.init(red: 90/255, green: 120/255, blue: 158/255, alpha: 1), for: .normal)
-        categoryButtonThree.backgroundColor      = UIColor(red: 255/255, green: 205/255, blue: 203/255, alpha: 1)
-        
+        categoryButtonThree.setTitleColor(.white, for: .normal)
+    
+        categoryButtonThree.backgroundColor = UIColor.systemGray
         categoryButtonThree.layer.borderWidth    = 1
         categoryButtonThree.layer.borderColor    = UIColor.systemBackground.cgColor
         categoryButtonThree.layer.cornerRadius   = 10
         categoryButtonThree.layer.maskedCorners  = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
-        categoryButtonThree.layer.borderColor   = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1).cgColor
+        categoryButtonThree.layer.borderColor    = Colors.customGrayBackground.color.cgColor
     }
-    
     
     
     func configureCategoryButtons() {

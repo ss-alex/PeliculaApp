@@ -2,7 +2,7 @@
 //  PAAlertContainerView.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/17.
+//  Created by Alexey Kirpichnikov on 2020/4/17.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 
@@ -22,10 +22,10 @@ class PAAlertContainerView: UIView {
     
     
     private func configure () {
-        backgroundColor       = .systemBackground
-        layer.cornerRadius    = 16
-        layer.borderWidth     = 2
-        layer.borderColor     = UIColor.white.cgColor
+        backgroundColor      = .systemBackground
+        layer.cornerRadius   = 16
+        layer.borderWidth    = 2
+        layer.borderColor    = UIColor.white.cgColor
         
         translatesAutoresizingMaskIntoConstraints = false
     }

@@ -2,7 +2,7 @@
 //  FavoritesListVC.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/16.
+//  Created by Alexey Kirpichnikov on 2020/4/16.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 
@@ -27,7 +27,7 @@ class FavoritesListVC: UIViewController {
     
     
     func configureViewController() {
-        view.backgroundColor    = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
+        view.backgroundColor    = Colors.customGrayBackground.color
         title                   = "Favorites"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -35,14 +35,13 @@ class FavoritesListVC: UIViewController {
     
     func configureTableView() {
         view.addSubview(tableView)
-        tableView.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
+        tableView.backgroundColor = Colors.customGrayBackground.color
         
-        tableView.frame             = view.bounds
-        tableView.rowHeight         = 140
-        tableView.removeExcessCells()
-        tableView.delegate = self
+        tableView.frame      = view.bounds
+        tableView.rowHeight  = 140
+        tableView.delegate   = self
         tableView.dataSource = self
-        
+        tableView.removeExcessCells()
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseID)
     }
     

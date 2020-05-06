@@ -17,7 +17,7 @@ struct Credits: Codable {
 struct Cast: Codable {
     let name: String?
     let profilePath: String?
-    public var profileURL: URL {
+    var profileURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(profilePath ?? "")")!
     }
 }

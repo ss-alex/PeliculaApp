@@ -18,7 +18,7 @@ enum ScreenSize {
 
 
 enum DeviceTypes {
-    static let idiom                        = UIDevice.current.userInterfaceIdiom /// 'userInterfaceIdiom' - The style of interface to use on the current device.
+    static let idiom                        = UIDevice.current.userInterfaceIdiom /// The style of interface to use on the current device.
     static let nativeScale                  = UIScreen.main.nativeScale
     static let scale                        = UIScreen.main.scale
     
@@ -33,6 +33,24 @@ enum DeviceTypes {
     
     static func isiPhoneXAspectRatio() -> Bool {
         return isiPhoneX || isiPhoneXsMaxAndXr
+    }
+}
+
+
+enum Colors {
+    case customPink
+    case customGrayBackground
+    case customRed
+    
+    var color: UIColor {
+        switch self {
+        case .customPink:
+            return UIColor(red: 255/255, green: 205/255, blue: 203/255, alpha: 1)
+        case .customGrayBackground:
+            return UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
+        case .customRed:
+            return UIColor(red: 252/255, green: 97/255, blue: 97/255, alpha: 1)
+        }
     }
 }
 

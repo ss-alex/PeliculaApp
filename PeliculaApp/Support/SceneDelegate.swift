@@ -12,7 +12,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -27,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     func configureNavigationBar () {
-        UINavigationBar.appearance().tintColor = UIColor(red: 252/255, green: 97/255, blue: 97/255, alpha: 1)
+        UINavigationBar.appearance().tintColor = Colors.customRed.color
     }
     
 

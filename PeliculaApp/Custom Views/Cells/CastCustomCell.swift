@@ -2,7 +2,7 @@
 //  CastCustomCell.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/27.
+//  Created by Alexey Kirpichnikov on 2020/4/27.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 
@@ -12,7 +12,6 @@ class CastCustomCell: UICollectionViewCell {
     
     let castImageView   = UIImageView()
     let castNameLabel   = UILabel()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,12 +37,12 @@ class CastCustomCell: UICollectionViewCell {
         self.addSubview(castImageView)
         castImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        castImageView.layer.borderColor  = UIColor.label.cgColor
-        castImageView.layer.borderWidth  = 2
-        castImageView.layer.cornerRadius = 60/2
-        castImageView.clipsToBounds      = true
-        castImageView.contentMode        = .scaleAspectFill
-        castImageView.image              = UIImage(named: "placeholder")
+        castImageView.layer.borderColor    = UIColor.label.cgColor
+        castImageView.layer.borderWidth    = 2
+        castImageView.layer.cornerRadius   = 60/2
+        castImageView.clipsToBounds        = true
+        castImageView.contentMode          = .scaleAspectFill
+        castImageView.image                = UIImage(named: "placeholder")
     }
     
     
@@ -51,11 +50,11 @@ class CastCustomCell: UICollectionViewCell {
         self.addSubview(castNameLabel)
         castNameLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        castNameLabel.textAlignment     = .center
-        castNameLabel.numberOfLines     = 2
-        castNameLabel.lineBreakMode     = .byTruncatingTail
-        castNameLabel.font              = UIFont.preferredFont(forTextStyle: .caption1)
-        castNameLabel.textColor         = .darkGray
+        castNameLabel.textAlignment   = .center
+        castNameLabel.numberOfLines   = 2
+        castNameLabel.lineBreakMode   = .byTruncatingTail
+        castNameLabel.font            = UIFont.preferredFont(forTextStyle: .caption1)
+        castNameLabel.textColor       = .darkGray
     }
     
     
@@ -70,6 +69,5 @@ class CastCustomCell: UICollectionViewCell {
             castNameLabel.heightAnchor.constraint(equalToConstant: 46)
         ])
     }
-    
     
 }

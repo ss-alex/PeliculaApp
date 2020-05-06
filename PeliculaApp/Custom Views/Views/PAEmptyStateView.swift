@@ -2,7 +2,7 @@
 //  PAEmptyStateView.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/24.
+//  Created by Alexey Kirpichnikov on 2020/4/24.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 
@@ -10,8 +10,8 @@ import UIKit
 
 class PAEmptyStateView: UIView {
     
-    let messageLabel  = PATitleLabel(textAlignment: .center, fontSize: 28)
-    let logoImageView = UIImageView()
+    let messageLabel    = PATitleLabel(textAlignment: .center, fontSize: 28)
+    let logoImageView   = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,10 +32,10 @@ class PAEmptyStateView: UIView {
     
     private func configureMessageLabel() {
         addSubview(messageLabel)
-        messageLabel.numberOfLines  = 3
-        messageLabel.textColor      = .secondaryLabel
+        messageLabel.numberOfLines   = 3
+        messageLabel.textColor       = .secondaryLabel
         
-         let messageLabelCenterYConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? -80 : -150
+        let messageLabelCenterYConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? -80 : -150
         
         NSLayoutConstraint.activate([
             messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: messageLabelCenterYConstant),

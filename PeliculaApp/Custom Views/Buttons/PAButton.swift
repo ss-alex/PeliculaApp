@@ -37,7 +37,7 @@ class PAButton: UIButton {
     
     
     func set(backgroundColor:UIColor, title: String) {
-        self.backgroundColor    = backgroundColor
+        self.backgroundColor = backgroundColor
         setTitle(title, for: .normal)
     }
 }

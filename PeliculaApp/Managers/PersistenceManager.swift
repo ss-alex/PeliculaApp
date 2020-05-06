@@ -17,8 +17,7 @@ enum PersistenceManager {
     
     static private let defaults = UserDefaults.standard
     enum Keys {
-        //static let favouritesKey = "favorites"
-        static let favouritesKey2 = "favorites2"
+        static let favouritesKey = "favorites2"
     }
     
     static func updateWith(favoritedMovie: FavoritedMovie, actionType: PersistenceActionType, completed: @escaping (PAError?) -> Void) {
@@ -51,7 +50,7 @@ enum PersistenceManager {
     //Get data of already favorited movies.. First Decoding then Encoding
     static func retrieveFavorites(completed: @escaping (Result<[FavoritedMovie], PAError>) -> Void) {
         
-        guard let favoritesData = defaults.object(forKey: Keys.favouritesKey2) as? Data else {
+        guard let favoritesData = defaults.object(forKey: Keys.favouritesKey) as? Data else {
             completed(.success([]))
             return
         }
@@ -73,11 +72,10 @@ enum PersistenceManager {
         do{
             let encoder = JSONEncoder()
             let encodedFavorites = try encoder.encode(favoritedMovies)
-            defaults.set(encodedFavorites, forKey: Keys.favouritesKey2)
+            defaults.set(encodedFavorites, forKey: Keys.favouritesKey)
             return nil /// we are returning 'nil' because no error happens
         } catch {
             return .unableToFavorite
-            print ("unableToFavorite error in save method")
         }
     }
     

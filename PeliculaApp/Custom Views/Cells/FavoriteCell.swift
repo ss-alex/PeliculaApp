@@ -2,7 +2,7 @@
 //  FavoriteCell.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/23.
+//  Created by Alexey Kirpichnikov on 2020/4/23.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 
@@ -15,7 +15,6 @@ class FavoriteCell: UITableViewCell {
     let posterImage = PAPosterImageView(frame: .zero)
     let movieTitle  = UILabel()
 
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureMovieTitle()
@@ -32,10 +31,9 @@ class FavoriteCell: UITableViewCell {
     func configurePosterImage() {
         self.addSubview(posterImage)
         posterImage.translatesAutoresizingMaskIntoConstraints = false
-        posterImage.backgroundColor = .systemGray4
-        
-        posterImage.image = UIImage(named: "placeholder3")
-        posterImage.contentMode = .scaleAspectFit
+        posterImage.backgroundColor   = .systemGray4
+        posterImage.contentMode       = .scaleAspectFit
+        posterImage.image             = UIImage(named: "placeholder3")
     }
     
     
@@ -47,15 +45,13 @@ class FavoriteCell: UITableViewCell {
         movieTitle.font          = UIFont.systemFont(ofSize: 20, weight: .bold)
         movieTitle.textColor     = .label
         movieTitle.lineBreakMode = .byTruncatingTail
-        movieTitle.adjustsFontSizeToFitWidth = false
-        
         movieTitle.numberOfLines = 2
+        movieTitle.adjustsFontSizeToFitWidth = false
     }
     
     
     private func configureLayout() {
         accessoryType       = .disclosureIndicator
-        
         let padding:CGFloat = 12
         
         NSLayoutConstraint.activate([

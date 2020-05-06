@@ -2,7 +2,7 @@
 //  PATitleLabel.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/4/17.
+//  Created by Alexey Kirpichnikov on 2020/4/17.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 
@@ -14,6 +14,7 @@ class PATitleLabel: UILabel {
         super.init(frame: frame)
         configure ()
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -28,10 +29,10 @@ class PATitleLabel: UILabel {
     
     
     private func configure () {
-        textColor                       = .label
-        adjustsFontSizeToFitWidth       = true
-        minimumScaleFactor              = 0.9 /// don't shrink font more that 90%
-        lineBreakMode                   = .byTruncatingTail /// add 3 dots in the end if the label is long
+        textColor                   = .label
+        adjustsFontSizeToFitWidth   = true
+        minimumScaleFactor          = 0.9
+        lineBreakMode               = .byTruncatingTail
         translatesAutoresizingMaskIntoConstraints = false
     }
     

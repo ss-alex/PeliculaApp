@@ -19,6 +19,8 @@ open class PACarouselFlowLayout: UICollectionViewFlowLayout {
     fileprivate struct LayoutState {
         var size: CGSize
         var direction: UICollectionView.ScrollDirection
+        
+        
         func isEqual(_ otherState: LayoutState) -> Bool {
             return self.size.equalTo(otherState.size) && self.direction == otherState.direction
         }
@@ -43,12 +45,14 @@ open class PACarouselFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
+    
     fileprivate func setupCollectionView() {
         guard let collectionView = self.collectionView else { return }
         if collectionView.decelerationRate != UIScrollView.DecelerationRate.fast {
             collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         }
     }
+    
     
     fileprivate func updateLayout() {
         guard let collectionView = self.collectionView else { return }
@@ -72,9 +76,11 @@ open class PACarouselFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
+    
     override open func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
+    
     
     override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let superAttributes = super.layoutAttributesForElements(in: rect),
@@ -82,6 +88,7 @@ open class PACarouselFlowLayout: UICollectionViewFlowLayout {
             else { return nil }
         return attributes.map({ self.transformLayoutAttributes($0) })
     }
+    
     
     fileprivate func transformLayoutAttributes(_ attributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         guard let collectionView = self.collectionView else { return attributes }
@@ -110,6 +117,7 @@ open class PACarouselFlowLayout: UICollectionViewFlowLayout {
         
         return attributes
     }
+    
     
     override open func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let collectionView = collectionView , !collectionView.isPagingEnabled,

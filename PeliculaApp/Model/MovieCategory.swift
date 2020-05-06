@@ -2,7 +2,7 @@
 //  MovieCategory.swift
 //  PeliculaApp
 //
-//  Created by Лена Мырленко on 2020/5/2.
+//  Created by Alexey Kirpichnikov on 2020/5/2.
 //  Copyright © 2020 Surf. All rights reserved.
 //
 

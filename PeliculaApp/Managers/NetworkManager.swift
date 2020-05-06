@@ -15,22 +15,21 @@ class NetworkManager {
     
     private init() {}
     
-    private let urlSession = URLSession.shared
-    private let baseURL = URL(string: "https://api.themoviedb.org/3")!
-    private let apiKey = "7dbb4be29f1194262f58b011ed0f0a8c"
+    private let urlSession   = URLSession.shared
+    private let baseURL      = URL(string: "https://api.themoviedb.org/3")!
+    private let apiKey       = "7dbb4be29f1194262f58b011ed0f0a8c"
     
     private let jsonDecoder: JSONDecoder = {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        let dateFormatter = DateFormatter()
+        let dateFormatter        = DateFormatter()
         dateFormatter.dateFormat = "yyyy-mm-dd"
         jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
         return jsonDecoder
     }()
     
     var imageCache = NSCache<NSString, UIImage>()
-    
     
      //MARK:- General methods
     
@@ -64,6 +63,7 @@ class NetworkManager {
                 } catch {
                     completion(.failure(.decodeError))
                 }
+                
             case .failure(let error):
                 completion(.failure(.apiError))
                 print ("\(error.localizedDescription)")
@@ -101,6 +101,7 @@ class NetworkManager {
                 } catch {
                     completion(.failure(.decodeError))
                 }
+                
             case .failure(let error):
                 completion(.failure(.apiError))
                 print ("\(error.localizedDescription)")
@@ -133,7 +134,7 @@ class NetworkManager {
     
     //MARK:- Method for Credits by MovieID
     public func fetchCredits(movieID: Int, result: @escaping (Result <Credits, PAError>) -> Void) {
-           
+        
            let movieURL = baseURL
             .appendingPathComponent("movie")
             .appendingPathComponent(String(movieID))
@@ -152,12 +153,12 @@ class NetworkManager {
         }
         
         var queryItems = [URLQueryItem(name: "api_key", value: apiKey),
-        URLQueryItem(name: "language", value: "en-US"),
-        URLQueryItem(name: "include_adult", value: "false"),
-        URLQueryItem(name: "region", value: "US"),
-        URLQueryItem(name: "query", value: query),
-        URLQueryItem(name: "page", value: "\(page)")
-        ]
+                          URLQueryItem(name: "language", value: "en-US"),
+                          URLQueryItem(name: "include_adult", value: "false"),
+                          URLQueryItem(name: "region", value: "US"),
+                          URLQueryItem(name: "query", value: query),
+                          URLQueryItem(name: "page", value: "\(page)")
+                        ]
         
         if let params = params {
             queryItems.append(contentsOf: params.map { URLQueryItem(name: $0.key, value: $0.value) })
@@ -184,6 +185,7 @@ class NetworkManager {
                 } catch {
                     completion(.failure(.decodeError))
                 }
+                
             case .failure(let error):
                 completion(.failure(.apiError))
                 print ("\(error.localizedDescription)")

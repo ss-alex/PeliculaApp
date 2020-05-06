@@ -73,14 +73,15 @@ class MovieScreenVC: UIViewController {
     
     
     func configureViewController() {
-        view.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
+        view.backgroundColor = Colors.customGrayBackground.color
+        
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissUserInfoVC))
         navigationItem.leftBarButtonItem = doneButton
-        navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 252/255, green: 97/255, blue: 97/255, alpha: 1)
+        navigationItem.leftBarButtonItem?.tintColor = Colors.customRed.color
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
-        navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 252/255, green: 97/255, blue: 97/255, alpha: 1)
+        navigationItem.rightBarButtonItem?.tintColor = Colors.customRed.color
     }
     
     
@@ -107,11 +108,10 @@ class MovieScreenVC: UIViewController {
                 print(movie)
                 
                 DispatchQueue.main.async {
-                    //self.backdropImageView.load(url: movie.backdropURL)
                     NetworkManager.shared.downloadImage(url: movie.backdropURL) { image in
                         self.backdropImageView.image = image
                     }
-                    //self.posterImageView.load(url: movie.posterURL)
+                    
                     NetworkManager.shared.downloadImage(url: movie.posterURL) { image in
                         self.posterImageView.image = image
                     }
@@ -125,7 +125,6 @@ class MovieScreenVC: UIViewController {
                         self.genreLabel.text = "N/A"
                     }
                     
-                    ///making spacing in UILabel Programatically ->
                     let attributedString       = NSMutableAttributedString(string: movie.overview)
                     let paragraphStyle         = NSMutableParagraphStyle()
                     paragraphStyle.lineSpacing = 11
@@ -162,9 +161,9 @@ class MovieScreenVC: UIViewController {
     func configureBackdropImageView() {
         contentView.addSubview(backdropImageView)
         backdropImageView.translatesAutoresizingMaskIntoConstraints = false
-        backdropImageView.backgroundColor = .systemGray2
-        backdropImageView.image           = UIImage(named: "placeholder2")
-        backdropImageView.contentMode     = .scaleAspectFit
+        backdropImageView.backgroundColor   = .systemGray2
+        backdropImageView.image             = UIImage(named: "placeholder2")
+        backdropImageView.contentMode       = .scaleAspectFit
     }
        
        
@@ -173,24 +172,23 @@ class MovieScreenVC: UIViewController {
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
         posterImageView.backgroundColor = .systemGray3
            
-        posterImageView.layer.cornerRadius = 10
-        posterImageView.layer.borderWidth = 2
-        posterImageView.layer.borderColor = UIColor.white.cgColor
-        posterImageView.clipsToBounds = true
+        posterImageView.layer.cornerRadius   = 10
+        posterImageView.layer.borderWidth    = 2
+        posterImageView.layer.borderColor    = UIColor.white.cgColor
+        posterImageView.clipsToBounds        = true
     }
        
        
     func configureScoreLabel() {
         contentView.addSubview(scoreLabel)
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        //scoreLabel.backgroundColor = .systemBlue
-        scoreLabel.backgroundColor = UIColor(red: 252/255, green: 97/255, blue: 97/255, alpha: 1)
-        scoreLabel.layer.cornerRadius = 40/2
-        scoreLabel.clipsToBounds = true
+        scoreLabel.backgroundColor = Colors.customRed.color
         
-        scoreLabel.textAlignment = .center
-        scoreLabel.font          = UIFont.systemFont(ofSize: 18, weight: .bold)
-        scoreLabel.textColor     = .systemBackground
+        scoreLabel.layer.cornerRadius   = 40/2
+        scoreLabel.clipsToBounds        = true
+        scoreLabel.textAlignment        = .center
+        scoreLabel.font                 = UIFont.systemFont(ofSize: 18, weight: .bold)
+        scoreLabel.textColor            = .systemBackground
            
     }
        
@@ -198,89 +196,82 @@ class MovieScreenVC: UIViewController {
     func configureMovieLabel() {
         contentView.addSubview(movieTitleLabel)
         movieTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-           //movieTitleLabel.backgroundColor            = .systemGray4
-        movieTitleLabel.adjustsFontSizeToFitWidth  = true
-        movieTitleLabel.minimumScaleFactor         = 0.9
-        movieTitleLabel.font                       = UIFont.preferredFont(forTextStyle: .headline)
-        movieTitleLabel.textColor                  = .darkGray
-        movieTitleLabel.lineBreakMode              = .byTruncatingTail
-        movieIntroLabel.numberOfLines              = 1
+
+        movieTitleLabel.adjustsFontSizeToFitWidth   = true
+        movieTitleLabel.minimumScaleFactor          = 0.9
+        movieTitleLabel.font                        = UIFont.preferredFont(forTextStyle: .headline)
+        movieTitleLabel.textColor                   = .darkGray
+        movieTitleLabel.lineBreakMode               = .byTruncatingTail
+        movieIntroLabel.numberOfLines               = 1
     }
        
        
     func configureGenreLabel() {
         contentView.addSubview(genreLabel)
         genreLabel.translatesAutoresizingMaskIntoConstraints = false
-        //genreLabel.backgroundColor = .systemGray5
-        genreLabel.font            = UIFont.preferredFont(forTextStyle: .caption1)
-        genreLabel.textColor       = .darkGray
+       
+        genreLabel.textColor   = .darkGray
+        genreLabel.font        = UIFont.preferredFont(forTextStyle: .caption1)
     }
        
        
     func configureTimeLabel() {
         contentView.addSubview(timeLabel)
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        //timeLabel.backgroundColor = .systemGray5
-        timeLabel.font            = UIFont.preferredFont(forTextStyle: .caption1)
-        timeLabel.textColor       = .darkGray
+        timeLabel.textColor   = .darkGray
+        timeLabel.font        = UIFont.preferredFont(forTextStyle: .caption1)
     }
        
        
     func configureReleaseLabel() {
         contentView.addSubview(releaseLabel)
         releaseLabel.translatesAutoresizingMaskIntoConstraints = false
-        //releaseLabel.backgroundColor = .systemGray5
-        releaseLabel.font            = UIFont.preferredFont(forTextStyle: .caption1)
-        releaseLabel.textColor       = .darkGray
+        releaseLabel.textColor   = .darkGray
+        releaseLabel.font        = UIFont.preferredFont(forTextStyle: .caption1)
        }
        
        
     func configureIntroLabel() {
         contentView.addSubview(movieIntroLabel)
         movieIntroLabel.translatesAutoresizingMaskIntoConstraints = false
-        //movieIntroLabel.backgroundColor = .systemGray5
-        movieIntroLabel.text            = "Overview"
-        movieIntroLabel.font            = UIFont.preferredFont(forTextStyle: .headline)
-        movieIntroLabel.textColor       = .darkGray
+        movieIntroLabel.text        = "Overview"
+        movieIntroLabel.font        = UIFont.preferredFont(forTextStyle: .headline)
+        movieIntroLabel.textColor   = .darkGray
     }
        
        
     func configureOverviewLabel() {
         contentView.addSubview(overviewLabel)
         overviewLabel.translatesAutoresizingMaskIntoConstraints = false
-        //overviewLabel.backgroundColor   = .systemGray5
-           
-        overviewLabel.font              = UIFont.systemFont(ofSize: 14, weight: .regular)
-        overviewLabel.lineBreakMode     = .byTruncatingTail
-        overviewLabel.numberOfLines     = 7
-        overviewLabel.textColor         = .darkGray
+        overviewLabel.font            = UIFont.systemFont(ofSize: 14, weight: .regular)
+        overviewLabel.lineBreakMode   = .byTruncatingTail
+        overviewLabel.numberOfLines   = 7
+        overviewLabel.textColor       = .darkGray
     }
     
     
     func configureCastLabel() {
         contentView.addSubview(castLabel)
         castLabel.translatesAutoresizingMaskIntoConstraints = false
-        //castLabel.backgroundColor   = .systemGray5
-        
-        castLabel.text            = "Cast"
-        castLabel.font            = UIFont.preferredFont(forTextStyle: .headline)
-        castLabel.textColor       = .darkGray
+
+        castLabel.text        = "Cast"
+        castLabel.font        = UIFont.preferredFont(forTextStyle: .headline)
+        castLabel.textColor   = .darkGray
     }
     
     
 
     func configureCollectionView() {
         
-        
-        let flowLayout             = PACarouselFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.sideItemScale   = 0.9
-        flowLayout.sideItemAlpha   = 1
-        flowLayout.spacingMode     = .overlap(visibleOffset: 40)
+        let flowLayout               = PACarouselFlowLayout()
+        flowLayout.scrollDirection   = .horizontal
+        flowLayout.sideItemScale     = 0.9
+        flowLayout.sideItemAlpha     = 1
+        flowLayout.spacingMode       = .overlap(visibleOffset: 40)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.delegate        = self
-        collectionView.dataSource      = self
+        collectionView.delegate     = self
+        collectionView.dataSource   = self
         collectionView.register(CastCustomCell.self, forCellWithReuseIdentifier: "cell")
     }
     
@@ -311,7 +302,6 @@ class MovieScreenVC: UIViewController {
             movieTitleLabel.topAnchor.constraint(equalTo: backdropImageView.bottomAnchor, constant: 8),
             movieTitleLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 12),
             movieTitleLabel.trailingAnchor.constraint(equalTo: scoreLabel.leadingAnchor, constant: -8),
-            //movieTitleLabel.heightAnchor.constraint(equalToConstant: 24),
                
             genreLabel.bottomAnchor.constraint(equalTo: posterImageView.bottomAnchor),
             genreLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 12),
@@ -349,8 +339,7 @@ class MovieScreenVC: UIViewController {
         ])
     }
     
-    
-    
+
     //MARK:- @objc Methods
     
     @objc func dismissUserInfoVC () { dismiss(animated: true) }

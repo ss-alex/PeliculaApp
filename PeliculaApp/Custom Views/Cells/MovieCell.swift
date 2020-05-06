@@ -52,15 +52,15 @@ class MovieCell: UITableViewCell {
         NetworkManager.shared.downloadImage(url: movie.posterURL) { image in
             self.movieImageView.image = image
         }
-        movieTitleLabel.text    = movie.title
-        movieOverview.text      = movie.overview
-        dateLabel.text          = MovieCell.dateFormatter.string(from: movie.releaseDate)
+        movieTitleLabel.text   = movie.title
+        movieOverview.text     = movie.overview
+        dateLabel.text         = MovieCell.dateFormatter.string(from: movie.releaseDate)
     }
     
     
     func configureBackView() {
         backView.translatesAutoresizingMaskIntoConstraints = false
-        backView.backgroundColor = .systemGray6
+        backView.backgroundColor    = .systemGray6
         backView.layer.cornerRadius = 10
         addSubview(backView)
         
@@ -75,54 +75,52 @@ class MovieCell: UITableViewCell {
     
     func configureMovieImageView() {
         backView.addSubview(movieImageView)
-        movieImageView.backgroundColor = .systemGray5
-        movieImageView.layer.cornerRadius = 10
-        movieImageView.clipsToBounds = true
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
-        movieImageView.image = UIImage(named: "placeholder3")
-        movieImageView.contentMode = .scaleAspectFit
+        movieImageView.backgroundColor      = .systemGray5
+        movieImageView.layer.cornerRadius   = 10
+        movieImageView.clipsToBounds        = true
+        movieImageView.contentMode          = .scaleAspectFit
+        movieImageView.image                = UIImage(named: "placeholder3")
     }
     
     
     func configureMovieTitleLabel() {
         backView.addSubview(movieTitleLabel)
-        movieTitleLabel.numberOfLines = 2
-        movieTitleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         movieTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        movieTitleLabel.numberOfLines   = 2
+        movieTitleLabel.font            = UIFont.preferredFont(forTextStyle: .headline)
     }
     
     
     func configureMovieOverview () {
         backView.addSubview(movieOverview)
-        movieOverview.font              = UIFont.preferredFont(forTextStyle: .subheadline)
-        movieOverview.lineBreakMode     = .byTruncatingTail
-        movieOverview.numberOfLines     = 3
         movieOverview.translatesAutoresizingMaskIntoConstraints = false
+        movieOverview.lineBreakMode   = .byTruncatingTail
+        movieOverview.numberOfLines   = 3
+        movieOverview.font            = UIFont.preferredFont(forTextStyle: .subheadline)
     }
     
     
     func configureSymbolImageView() {
         backView.addSubview(symbolImageView)
-        symbolImageView.image = UIImage(systemName: "calendar")
-        symbolImageView.tintColor = .secondaryLabel
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
+        symbolImageView.tintColor   = .secondaryLabel
+        symbolImageView.image       = UIImage(systemName: "calendar")
     }
     
     
     func configureDateLabel() {
         backView.addSubview(dateLabel)
-        dateLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
-        dateLabel.textColor = .secondaryLabel
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.textColor   = .secondaryLabel
+        dateLabel.font        = UIFont.preferredFont(forTextStyle: .footnote)
     }
     
     
     func configureHeartButton() {
         backView.addSubview(heartButton)
-        //heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        heartButton.tintColor = .systemPink
         heartButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        heartButton.tintColor = .systemPink
         heartButton.addTarget(self, action: #selector(handleMarkAsFavorite), for: .touchUpInside)
     }
     
@@ -130,7 +128,6 @@ class MovieCell: UITableViewCell {
     @objc func handleMarkAsFavorite() {
         print("Marking as favorite")
     }
-    
     
     let innerPadding: CGFloat = 10
     let outerPadding: CGFloat = 4
@@ -168,4 +165,5 @@ class MovieCell: UITableViewCell {
             dateLabel.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
+    
 }

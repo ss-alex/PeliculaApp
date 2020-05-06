@@ -21,7 +21,6 @@
 		D9154E1C2449E8FA00F900A1 /* PAAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9154E1B2449E8FA00F900A1 /* PAAlertVC.swift */; };
 		D9154E1E2449F95A00F900A1 /* UIVC+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9154E1D2449F95A00F900A1 /* UIVC+Alert.swift */; };
 		D9219DA7244D5979001AA3CB /* MovieScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DA6244D5979001AA3CB /* MovieScreenVC.swift */; };
-		D9219DAA244E7E9A001AA3CB /* PAHeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DA9244E7E9A001AA3CB /* PAHeartButton.swift */; };
 		D9219DAC244EA485001AA3CB /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DAB244EA485001AA3CB /* PersistenceManager.swift */; };
 		D9219DB0244EA620001AA3CB /* PAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DAF244EA620001AA3CB /* PAError.swift */; };
 		D9219DB2244EACBB001AA3CB /* FavoritedMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DB1244EACBB001AA3CB /* FavoritedMovie.swift */; };
@@ -62,7 +61,6 @@
 		D9154E1B2449E8FA00F900A1 /* PAAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAAlertVC.swift; sourceTree = "<group>"; };
 		D9154E1D2449F95A00F900A1 /* UIVC+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVC+Alert.swift"; sourceTree = "<group>"; };
 		D9219DA6244D5979001AA3CB /* MovieScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieScreenVC.swift; sourceTree = "<group>"; };
-		D9219DA9244E7E9A001AA3CB /* PAHeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAHeartButton.swift; sourceTree = "<group>"; };
 		D9219DAB244EA485001AA3CB /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		D9219DAF244EA620001AA3CB /* PAError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAError.swift; sourceTree = "<group>"; };
 		D9219DB1244EACBB001AA3CB /* FavoritedMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritedMovie.swift; sourceTree = "<group>"; };
@@ -205,7 +203,6 @@
 		D90C33E72448971500A11397 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				D9219DA8244E7E4B001AA3CB /* SubClasses */,
 				D90C33E82448974E00A11397 /* PAButton.swift */,
 			);
 			path = Buttons;
@@ -235,14 +232,6 @@
 				D9154E1B2449E8FA00F900A1 /* PAAlertVC.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		D9219DA8244E7E4B001AA3CB /* SubClasses */ = {
-			isa = PBXGroup;
-			children = (
-				D9219DA9244E7E9A001AA3CB /* PAHeartButton.swift */,
-			);
-			path = SubClasses;
 			sourceTree = "<group>";
 		};
 		D9219DAE244EA5E8001AA3CB /* Utilities */ = {
@@ -379,7 +368,6 @@
 				D9F9FA4A2444853D00C3D509 /* URLSession+DataTask.swift in Sources */,
 				D9219DB4244EC419001AA3CB /* UITableView+RemoveCells.swift in Sources */,
 				D9F9FA48244484E100C3D509 /* Movie.swift in Sources */,
-				D9219DAA244E7E9A001AA3CB /* PAHeartButton.swift in Sources */,
 				D9839D49245976D700B10493 /* UIVC+LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
