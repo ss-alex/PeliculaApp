@@ -2,15 +2,18 @@
 
 App that connects users with the world of movies.
 
-That app is in progress now.
+## Features (must have):
+1. ✅ search for movies by a word
+2. ✅ search for movies by a movie ID
+3. ✅ detailed information of picked movies
 
-Features (must have):
-- search for movies by a word
-- search for movies by a movie ID
-- search for movies by categories (now playing, upcoming, popular, topRated)
-- local saving of movies that are favorited by users
-- detailed information of picked movies
+## Features (additional):
+1. ✅ local saving of movies that are favorited by users
+2. ✅ search for movies by categories (now playing, popular, topRated)
+3. ✅ custom Alerts
+4. ✅ tableView animation
+5. ✅ horizontal collectionView with custome diffable data source
+6. ✅ custom emptyStateView
 
-Features (additional):
-- Splash screen and google registration form
-- UITableView animation
+## To build-in the application:
+  You just need to clone the project, no 3rd party libraries were used.
