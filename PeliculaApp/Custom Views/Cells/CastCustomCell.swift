@@ -42,7 +42,7 @@ class CastCustomCell: UICollectionViewCell {
         castImageView.layer.cornerRadius   = 60/2
         castImageView.clipsToBounds        = true
         castImageView.contentMode          = .scaleAspectFill
-        castImageView.image                = UIImage(named: "placeholder")
+        castImageView.image                = Images.castPlaceholder
     }
     
     

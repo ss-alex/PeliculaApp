@@ -37,22 +37,20 @@ enum DeviceTypes {
 }
 
 
-enum Colors {
-    case customPink
-    case customGrayBackground
-    case customRed
-    
-    var color: UIColor {
-        switch self {
-        case .customPink:
-            return UIColor(red: 255/255, green: 205/255, blue: 203/255, alpha: 1)
-        case .customGrayBackground:
-            return UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
-        case .customRed:
-            return UIColor(red: 252/255, green: 97/255, blue: 97/255, alpha: 1)
-        }
-    }
+enum Images {
+    static let paLogo                       = UIImage(named: "logo_pelicula")
+    static let emptyStateLogo               = UIImage(named: "gray_dog2")
+    static let castPlaceholder              = UIImage(named: "placeholder")
+    static let backdropPlaceholder          = UIImage(named: "placeholder2")
+    static let moviePosterPlaceholder       = UIImage(named: "placeholder3")
 }
+
+
+enum SFSymbols {
+    static let calendar                     = UIImage(systemName: "calendar")
+}
+
+
 
 
 

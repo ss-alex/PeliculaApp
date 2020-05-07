@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     func configureNavigationBar () {
-        UINavigationBar.appearance().tintColor = Colors.customRed.color
+        UINavigationBar.appearance().tintColor = PAColors.customRed.color
     }
     
 

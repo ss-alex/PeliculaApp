@@ -33,7 +33,7 @@ class FavoriteCell: UITableViewCell {
         posterImage.translatesAutoresizingMaskIntoConstraints = false
         posterImage.backgroundColor   = .systemGray4
         posterImage.contentMode       = .scaleAspectFit
-        posterImage.image             = UIImage(named: "placeholder3")
+        posterImage.image             = Images.moviePosterPlaceholder
     }
     
     

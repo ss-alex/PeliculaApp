@@ -22,21 +22,24 @@ class SearchVC: UIViewController {
     
     var isUsernameEntered: Bool { return !movieTextField.text!.isEmpty }
     
+    var categoryButtons: [UIButton] = []
+    
     //MARK:- Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Colors.customGrayBackground.color
+        view.backgroundColor = PAColors.customGrayBackground.color
         
         createDismissKeyboardGesture()
         configureLogoImageView()
         configureUsernameTextField()
         configureGoButton()
         configureTextLabel()
+        configureCategoryButtons()
         configureCategoryButtonTwo()
         configureCategoryButtonOne()
         configureCategoryButtonThree()
-        configureCategoryButtons()
+        configureCategoryButtonsLayout()
         configureLayout()
     }
     
@@ -60,7 +63,7 @@ class SearchVC: UIViewController {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.layer.cornerRadius = 10
-        logoImageView.image              = UIImage(named: "logo_pelicula")
+        logoImageView.image              = Images.paLogo
     }
     
     
@@ -74,12 +77,12 @@ class SearchVC: UIViewController {
         movieTextField.layer.borderWidth   = 2
         movieTextField.layer.borderColor   = UIColor.systemGray4.cgColor
         
-        movieTextField.placeholder               = "Enter a keyword"
-        movieTextField.textColor                 = .label
-        movieTextField.textAlignment             = .center
-        movieTextField.font                      = UIFont.preferredFont(forTextStyle: .title2)
-        movieTextField.adjustsFontSizeToFitWidth = true
-        movieTextField.minimumFontSize           = 12
+        movieTextField.placeholder     = "Enter a keyword"
+        movieTextField.textColor       = .label
+        movieTextField.textAlignment   = .center
+        movieTextField.font            = UIFont.preferredFont(forTextStyle: .title2)
+        movieTextField.adjustsFontSizeToFitWidth   = true
+        movieTextField.minimumFontSize             = 12
         
         movieTextField.autocorrectionType  = .no
         movieTextField.returnKeyType       = .go
@@ -92,7 +95,7 @@ class SearchVC: UIViewController {
         goButton.translatesAutoresizingMaskIntoConstraints = false
         goButton.addTarget(self, action: #selector(pushMovieListVC), for: .touchUpInside)
         
-        goButton.backgroundColor       = Colors.customRed.color
+        goButton.backgroundColor       = PAColors.customRed.color
         goButton.layer.cornerRadius    = 10
         goButton.layer.maskedCorners   = [.layerMaxXMinYCorner,.layerMaxXMaxYCorner]
         
@@ -114,58 +117,45 @@ class SearchVC: UIViewController {
     }
     
     
-    func configureCategoryButtonTwo() {
-        view.addSubview(categoryButtonTwo)
-        categoryButtonTwo.translatesAutoresizingMaskIntoConstraints = false
-        categoryButtonTwo.addTarget(self, action: #selector(pushNowPlayingMoviesVC), for: .touchUpInside)
+    func configureCategoryButtons() {
+        categoryButtons = [categoryButtonOne,categoryButtonTwo,categoryButtonThree]
         
-        categoryButtonTwo.titleLabel?.font    = UIFont.preferredFont(forTextStyle: .headline)
-        categoryButtonTwo.setTitleColor(.white, for: .normal)
+        for categoryButton in categoryButtons {
+            view.addSubview(categoryButton)
+            categoryButton.translatesAutoresizingMaskIntoConstraints = false
+            
+            categoryButton.titleLabel?.font   = UIFont.preferredFont(forTextStyle: .headline)
+            categoryButton.setTitleColor(.white, for: .normal)
+            categoryButton.backgroundColor    = UIColor.systemGray
+            categoryButton.layer.borderWidth  = 1
+            categoryButton.layer.borderColor  = PAColors.customGrayBackground.color.cgColor
+        }
+    }
+    
+    
+    func configureCategoryButtonTwo() {
+        categoryButtonTwo.addTarget(self, action: #selector(pushNowPlayingMoviesVC), for: .touchUpInside)
         categoryButtonTwo.setTitle("Now Playing", for: .normal)
-   
-        categoryButtonTwo.backgroundColor = UIColor.systemGray
-        categoryButtonTwo.layer.borderWidth  = 1
-        categoryButtonTwo.layer.borderColor  = Colors.customGrayBackground.color.cgColor
     }
     
     
     func configureCategoryButtonOne() {
-        view.addSubview(categoryButtonOne)
-        categoryButtonOne.translatesAutoresizingMaskIntoConstraints = false
         categoryButtonOne.addTarget(self, action: #selector(pushPopularMoviesVC), for: .touchUpInside)
-        
         categoryButtonOne.setTitle("Popular", for: .normal)
-        categoryButtonOne.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        categoryButtonOne.setTitleColor(.white, for: .normal)
-        
-        categoryButtonOne.backgroundColor = UIColor.systemGray
-        categoryButtonOne.layer.borderWidth    = 1
-        categoryButtonOne.layer.borderColor    = UIColor.systemBackground.cgColor
         categoryButtonOne.layer.cornerRadius   = 10
         categoryButtonOne.layer.maskedCorners  = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
-        categoryButtonOne.layer.borderColor    = Colors.customGrayBackground.color.cgColor
     }
     
     
     func configureCategoryButtonThree() {
-        view.addSubview(categoryButtonThree)
-        categoryButtonThree.translatesAutoresizingMaskIntoConstraints = false
         categoryButtonThree.addTarget(self, action: #selector(pushTopRatedMoviesVC), for: .touchUpInside)
-        
         categoryButtonThree.setTitle("Top Rated", for: .normal)
-        categoryButtonThree.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        categoryButtonThree.setTitleColor(.white, for: .normal)
-    
-        categoryButtonThree.backgroundColor = UIColor.systemGray
-        categoryButtonThree.layer.borderWidth    = 1
-        categoryButtonThree.layer.borderColor    = UIColor.systemBackground.cgColor
         categoryButtonThree.layer.cornerRadius   = 10
         categoryButtonThree.layer.maskedCorners  = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
-        categoryButtonThree.layer.borderColor    = Colors.customGrayBackground.color.cgColor
     }
     
     
-    func configureCategoryButtons() {
+    func configureCategoryButtonsLayout() {
         
         NSLayoutConstraint.activate([
             categoryButtonTwo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -196,7 +186,7 @@ class SearchVC: UIViewController {
             logoImageView.widthAnchor.constraint(equalToConstant: 240),
             logoImageView.heightAnchor.constraint(equalToConstant: 115),
             
-            movieTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 155),
+            movieTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 130),
             movieTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             movieTextField.widthAnchor.constraint(equalToConstant: 200),
             movieTextField.heightAnchor.constraint(equalToConstant: 50),

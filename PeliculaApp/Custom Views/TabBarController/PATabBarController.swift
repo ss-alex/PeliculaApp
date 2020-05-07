@@ -12,7 +12,7 @@ class PATabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UITabBar.appearance().tintColor = Colors.customRed.color
+        UITabBar.appearance().tintColor = PAColors.customRed.color
         viewControllers = [createSearchNC(),createFavoritesNC()]
     }
     

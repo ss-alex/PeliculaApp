@@ -19,8 +19,7 @@ class MovieCell: UITableViewCell {
     let movieOverview     = UILabel()
     let symbolImageView   = UIImageView()
     let dateLabel         = UILabel()
-    let heartButton       = UIButton()
-    
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,9 +29,10 @@ class MovieCell: UITableViewCell {
         configureMovieOverview ()
         configureSymbolImageView()
         configureDateLabel()
-        configureHeartButton()
         
         configureElements()
+        
+        self.backgroundColor = PAColors.customGrayBackground.color
     }
     
     
@@ -60,7 +60,7 @@ class MovieCell: UITableViewCell {
     
     func configureBackView() {
         backView.translatesAutoresizingMaskIntoConstraints = false
-        backView.backgroundColor    = .systemGray6
+        backView.backgroundColor    = .systemGray4
         backView.layer.cornerRadius = 10
         addSubview(backView)
         
@@ -76,11 +76,11 @@ class MovieCell: UITableViewCell {
     func configureMovieImageView() {
         backView.addSubview(movieImageView)
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
-        movieImageView.backgroundColor      = .systemGray5
+        movieImageView.backgroundColor      = .systemGray3
         movieImageView.layer.cornerRadius   = 10
         movieImageView.clipsToBounds        = true
         movieImageView.contentMode          = .scaleAspectFit
-        movieImageView.image                = UIImage(named: "placeholder3")
+        movieImageView.image                = Images.moviePosterPlaceholder
     }
     
     
@@ -105,7 +105,7 @@ class MovieCell: UITableViewCell {
         backView.addSubview(symbolImageView)
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
         symbolImageView.tintColor   = .secondaryLabel
-        symbolImageView.image       = UIImage(systemName: "calendar")
+        symbolImageView.image       = SFSymbols.calendar
     }
     
     
@@ -116,18 +116,6 @@ class MovieCell: UITableViewCell {
         dateLabel.font        = UIFont.preferredFont(forTextStyle: .footnote)
     }
     
-    
-    func configureHeartButton() {
-        backView.addSubview(heartButton)
-        heartButton.translatesAutoresizingMaskIntoConstraints = false
-        heartButton.tintColor = .systemPink
-        heartButton.addTarget(self, action: #selector(handleMarkAsFavorite), for: .touchUpInside)
-    }
-    
-    
-    @objc func handleMarkAsFavorite() {
-        print("Marking as favorite")
-    }
     
     let innerPadding: CGFloat = 10
     let outerPadding: CGFloat = 4
@@ -154,14 +142,9 @@ class MovieCell: UITableViewCell {
             symbolImageView.widthAnchor.constraint(equalToConstant: 24),
             symbolImageView.heightAnchor.constraint(equalToConstant: 24),
             
-            heartButton.centerYAnchor.constraint(equalTo: symbolImageView.centerYAnchor),
-            heartButton.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -outerPadding),
-            heartButton.widthAnchor.constraint(equalToConstant: 24),
-            heartButton.heightAnchor.constraint(equalToConstant: 24),
-            
             dateLabel.centerYAnchor.constraint(equalTo: symbolImageView.centerYAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: symbolImageView.trailingAnchor, constant: innerPadding),
-            dateLabel.trailingAnchor.constraint(equalTo: heartButton.leadingAnchor, constant: -innerPadding),
+            dateLabel.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -innerPadding),
             dateLabel.heightAnchor.constraint(equalToConstant: 24)
         ])
     }

@@ -73,15 +73,15 @@ class MovieScreenVC: UIViewController {
     
     
     func configureViewController() {
-        view.backgroundColor = Colors.customGrayBackground.color
+        view.backgroundColor = PAColors.customGrayBackground.color
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissUserInfoVC))
         navigationItem.leftBarButtonItem = doneButton
-        navigationItem.leftBarButtonItem?.tintColor = Colors.customRed.color
+        navigationItem.leftBarButtonItem?.tintColor = PAColors.customRed.color
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
-        navigationItem.rightBarButtonItem?.tintColor = Colors.customRed.color
+        navigationItem.rightBarButtonItem?.tintColor = PAColors.customRed.color
     }
     
     
@@ -162,7 +162,7 @@ class MovieScreenVC: UIViewController {
         contentView.addSubview(backdropImageView)
         backdropImageView.translatesAutoresizingMaskIntoConstraints = false
         backdropImageView.backgroundColor   = .systemGray2
-        backdropImageView.image             = UIImage(named: "placeholder2")
+        backdropImageView.image             = Images.backdropPlaceholder
         backdropImageView.contentMode       = .scaleAspectFit
     }
        
@@ -182,7 +182,7 @@ class MovieScreenVC: UIViewController {
     func configureScoreLabel() {
         contentView.addSubview(scoreLabel)
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        scoreLabel.backgroundColor = Colors.customRed.color
+        scoreLabel.backgroundColor = PAColors.customRed.color
         
         scoreLabel.layer.cornerRadius   = 40/2
         scoreLabel.clipsToBounds        = true
@@ -209,7 +209,6 @@ class MovieScreenVC: UIViewController {
     func configureGenreLabel() {
         contentView.addSubview(genreLabel)
         genreLabel.translatesAutoresizingMaskIntoConstraints = false
-       
         genreLabel.textColor   = .darkGray
         genreLabel.font        = UIFont.preferredFont(forTextStyle: .caption1)
     }
@@ -228,7 +227,7 @@ class MovieScreenVC: UIViewController {
         releaseLabel.translatesAutoresizingMaskIntoConstraints = false
         releaseLabel.textColor   = .darkGray
         releaseLabel.font        = UIFont.preferredFont(forTextStyle: .caption1)
-       }
+    }
        
        
     func configureIntroLabel() {
@@ -258,7 +257,6 @@ class MovieScreenVC: UIViewController {
         castLabel.font        = UIFont.preferredFont(forTextStyle: .headline)
         castLabel.textColor   = .darkGray
     }
-    
     
 
     func configureCollectionView() {

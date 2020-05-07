@@ -14,7 +14,6 @@ class ReusableMovieVC: UIViewController {
         case name(String)
         case category(MovieCategory)
     }
-    
 
     let tableView = UITableView()
     var state: State
@@ -28,6 +27,8 @@ class ReusableMovieVC: UIViewController {
         conditionalFetchMethod ()
         configureViewController()
         configureTableView()
+        
+        view.backgroundColor = PAColors.customGrayBackground.color
     }
     
     
@@ -145,10 +146,6 @@ extension ReusableMovieVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MovieCell.reuseID, for: indexPath) as! MovieCell
-        
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = Colors.customPink.color
-        cell.selectedBackgroundView = backgroundView
         
         let movie = movies[indexPath.row]
         cell.set(movie: movie)

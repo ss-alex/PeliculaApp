@@ -48,7 +48,7 @@ class PAEmptyStateView: UIView {
     
     private func configureLogoImageView() {
         addSubview(logoImageView)
-        logoImageView.image = UIImage(named: "gray_dog2")
+        logoImageView.image = Images.emptyStateLogo
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         
         let logoImageBottomConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 48 : 8

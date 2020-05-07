@@ -27,7 +27,7 @@ class FavoritesListVC: UIViewController {
     
     
     func configureViewController() {
-        view.backgroundColor    = Colors.customGrayBackground.color
+        view.backgroundColor    = PAColors.customGrayBackground.color
         title                   = "Favorites"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -35,7 +35,7 @@ class FavoritesListVC: UIViewController {
     
     func configureTableView() {
         view.addSubview(tableView)
-        tableView.backgroundColor = Colors.customGrayBackground.color
+        tableView.backgroundColor = PAColors.customGrayBackground.color
         
         tableView.frame      = view.bounds
         tableView.rowHeight  = 140
@@ -59,6 +59,7 @@ class FavoritesListVC: UIViewController {
             case .failure(let error):
                 self.presentPAAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
             }
+            
             self.removeLoadingView()
         }
     }
@@ -66,10 +67,10 @@ class FavoritesListVC: UIViewController {
     
     func updateUI(with favoritedMovies: [FavoritedMovie]) {
         if favoritedMovies.isEmpty {
-            print ("No favorited users")
             self.showEmptyStateView(with: "No Movies?\nSearch and add a new one.", in: self.view)
         } else {
             self.favoritedMovies = favoritedMovies
+            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.view.bringSubviewToFront(self.tableView)
@@ -88,6 +89,7 @@ extension FavoritesListVC: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseID, for: indexPath) as! FavoriteCell
         
         let favoritedMovie = favoritedMovies[indexPath.row]
@@ -98,6 +100,7 @@ extension FavoritesListVC: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let favoritedMovie   = favoritedMovies[indexPath.row]
         let destVC  = MovieScreenVC()
         destVC.movieID = favoritedMovie.id
