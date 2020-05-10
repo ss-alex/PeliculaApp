@@ -15,5 +15,8 @@ App that connects users with the world of movies.
 5. ✅ horizontal collectionView with custome diffable data source
 6. ✅ custom emptyStateView
 
-## To build-in the application:
+## To launch the application:
   You just need to clone the project, no 3rd party libraries were used.
+  
+## UI Design:
+<img src="PeliculaApp/Images/PeliculaDesign.png" width="800">
