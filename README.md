@@ -19,4 +19,4 @@ App that connects users with the world of movies.
   You just need to clone the project, no 3rd party libraries were used.
   
 ## UI Design:
-<img src="PeliculaApp/Images/PeliculaDesign.png" width="800">
+<img src="PeliculaApp/Images/PeliculaUI.png" width="1000">
