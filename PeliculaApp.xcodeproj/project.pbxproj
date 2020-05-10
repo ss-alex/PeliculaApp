@@ -27,6 +27,7 @@
 		D9219DB4244EC419001AA3CB /* UITableView+RemoveCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DB3244EC419001AA3CB /* UITableView+RemoveCells.swift */; };
 		D974F9332462B05300D1145A /* PAColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D974F9322462B05300D1145A /* PAColors.swift */; };
 		D974F9372467E27600D1145A /* Pelicula UI Design.png in Resources */ = {isa = PBXBuildFile; fileRef = D974F9362467E27600D1145A /* Pelicula UI Design.png */; };
+		D974F9392467EAFC00D1145A /* PeliculaUI.png in Resources */ = {isa = PBXBuildFile; fileRef = D974F9382467EAFC00D1145A /* PeliculaUI.png */; };
 		D9839D2C24511FE500B10493 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9839D2B24511FE500B10493 /* FavoriteCell.swift */; };
 		D9839D2F245120C500B10493 /* PAPosterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9839D2E245120C500B10493 /* PAPosterImageView.swift */; };
 		D9839D312452CD3000B10493 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9839D302452CD3000B10493 /* Constants.swift */; };
@@ -69,6 +70,7 @@
 		D9219DB3244EC419001AA3CB /* UITableView+RemoveCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+RemoveCells.swift"; sourceTree = "<group>"; };
 		D974F9322462B05300D1145A /* PAColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAColors.swift; sourceTree = "<group>"; };
 		D974F9362467E27600D1145A /* Pelicula UI Design.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pelicula UI Design.png"; sourceTree = "<group>"; };
+		D974F9382467EAFC00D1145A /* PeliculaUI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PeliculaUI.png; sourceTree = "<group>"; };
 		D9839D2B24511FE500B10493 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		D9839D2E245120C500B10493 /* PAPosterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAPosterImageView.swift; sourceTree = "<group>"; };
 		D9839D302452CD3000B10493 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 		D974F9352467E20500D1145A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D974F9382467EAFC00D1145A /* PeliculaUI.png */,
 				D974F9362467E27600D1145A /* Pelicula UI Design.png */,
 			);
 			path = Images;
@@ -340,6 +343,7 @@
 			files = (
 				D974F9372467E27600D1145A /* Pelicula UI Design.png in Resources */,
 				D906949B244478670022BE8E /* LaunchScreen.storyboard in Resources */,
+				D974F9392467EAFC00D1145A /* PeliculaUI.png in Resources */,
 				D9069498244478670022BE8E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
