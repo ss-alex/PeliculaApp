@@ -26,6 +26,7 @@
 		D9219DB2244EACBB001AA3CB /* FavoritedMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DB1244EACBB001AA3CB /* FavoritedMovie.swift */; };
 		D9219DB4244EC419001AA3CB /* UITableView+RemoveCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9219DB3244EC419001AA3CB /* UITableView+RemoveCells.swift */; };
 		D974F9332462B05300D1145A /* PAColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D974F9322462B05300D1145A /* PAColors.swift */; };
+		D974F9372467E27600D1145A /* Pelicula UI Design.png in Resources */ = {isa = PBXBuildFile; fileRef = D974F9362467E27600D1145A /* Pelicula UI Design.png */; };
 		D9839D2C24511FE500B10493 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9839D2B24511FE500B10493 /* FavoriteCell.swift */; };
 		D9839D2F245120C500B10493 /* PAPosterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9839D2E245120C500B10493 /* PAPosterImageView.swift */; };
 		D9839D312452CD3000B10493 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9839D302452CD3000B10493 /* Constants.swift */; };
@@ -67,6 +68,7 @@
 		D9219DB1244EACBB001AA3CB /* FavoritedMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritedMovie.swift; sourceTree = "<group>"; };
 		D9219DB3244EC419001AA3CB /* UITableView+RemoveCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+RemoveCells.swift"; sourceTree = "<group>"; };
 		D974F9322462B05300D1145A /* PAColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAColors.swift; sourceTree = "<group>"; };
+		D974F9362467E27600D1145A /* Pelicula UI Design.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pelicula UI Design.png"; sourceTree = "<group>"; };
 		D9839D2B24511FE500B10493 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		D9839D2E245120C500B10493 /* PAPosterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAPosterImageView.swift; sourceTree = "<group>"; };
 		D9839D302452CD3000B10493 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				D906948D244478650022BE8E /* PeliculaApp */,
+				D906949C244478670022BE8E /* Info.plist */,
 				D906948C244478650022BE8E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -123,7 +126,7 @@
 				D9F9FA6F244693BF00C3D509 /* Extension */,
 				D90C33E32448083A00A11397 /* Support */,
 				D9219DAE244EA5E8001AA3CB /* Utilities */,
-				D906949C244478670022BE8E /* Info.plist */,
+				D974F9352467E20500D1145A /* Images */,
 			);
 			path = PeliculaApp;
 			sourceTree = "<group>";
@@ -247,6 +250,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		D974F9352467E20500D1145A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D974F9362467E27600D1145A /* Pelicula UI Design.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		D9839D2D2451208A00B10493 /* ImageViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +338,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D974F9372467E27600D1145A /* Pelicula UI Design.png in Resources */,
 				D906949B244478670022BE8E /* LaunchScreen.storyboard in Resources */,
 				D9069498244478670022BE8E /* Assets.xcassets in Resources */,
 			);
